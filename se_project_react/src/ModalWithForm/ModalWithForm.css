@@ -54,6 +54,32 @@
   height: 36px;
   width: 124px;
   color: white;
-  background: rgba(0, 0, 0, 0.3);
+  background: black;
   border: none;
+  cursor: pointer;
+}
+
+.modal_submit:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.modal_image {
+  border-radius: 4px;
+}
+
+.modal_fieldset {
+  border: none;
+}
+
+.modal_label-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal_label {
+  padding-top: 24px;
+}
+
+.modal_weather-type {
+  padding-top: 24px;
 }

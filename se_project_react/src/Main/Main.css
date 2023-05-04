@@ -1,11 +1,16 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../Fonts/CabinetGrotesk-Regular.otf");
+}
+
 .main {
   padding: 0 20px;
 }
 
-.main {
+.main_text {
   font-family: "Cabinet Grotesk";
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 20px;
+  line-height: 25px;
 }

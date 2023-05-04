@@ -34,8 +34,6 @@ function App() {
     });
   }, []);
 
-  console.log(temp);
-
   return (
     <div>
       <Header onCreateModal={handleCreateModal} />
@@ -43,41 +41,44 @@ function App() {
       <Footer />
       {activeModal === "create" && (
         <ModalWithForm title="New Garment" onClose={handleCloseModal}>
-          <label className="modal_label">
-            Name
-            <input
-              type="text"
-              name="name"
-              minlength="1"
-              maxlength="30"
-              placeholder="Name"
-              className="modal_input"
-            />
-          </label>
-          <label className="modal_label">
-            Image
-            <input
-              type="url"
-              name="link"
-              minlength="1"
-              maxlength="30"
-              placeholder="Image URL"
-              className="modal_input"
-            />
-          </label>
-          <p>Select the weather type:</p>
+          <div className="modal_label-container">
+            <label className="modal_label">
+              Name
+              <input
+                type="text"
+                name="name"
+                minLength="1"
+                maxLength="30"
+                placeholder="Name"
+                className="modal_input"
+              />
+            </label>
+            <label className="modal_label">
+              Image
+              <input
+                type="url"
+                name="link"
+                minLength="1"
+                maxLength="30"
+                placeholder="Image URL"
+                className="modal_input"
+                required
+              />
+            </label>
+          </div>
+          <p className="modal_weather-type">Select the weather type:</p>
           <div>
             <div>
-              <input type="radio" id="hot" value="hot" />
-              <label>Hot</label>
+              <input type="radio" id="hot" value="hot" name="rangeOfTemp" />
+              <label className="modal_temp-ranges">Hot</label>
             </div>
             <div>
-              <input type="radio" id="warm" value="warm" />
-              <label>Warm</label>
+              <input type="radio" id="warm" value="warm" name="rangeOfTemp" />
+              <label className="modal_temp-ranges">Warm</label>
             </div>
             <div>
-              <input type="radio" id="cold" value="cold" />
-              <label>Cold</label>
+              <input type="radio" id="cold" value="cold" name="rangeOfTemp" />
+              <label className="modal_temp-ranges">Cold</label>
             </div>
           </div>
         </ModalWithForm>

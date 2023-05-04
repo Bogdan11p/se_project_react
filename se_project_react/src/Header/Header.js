@@ -20,8 +20,9 @@ const Header = ({ onCreateModal }) => {
         <div>
           <button
             className="header_add-button"
-            type="text"
+            type="button"
             onClick={onCreateModal}
+            aria-label="Add"
           >
             + Add Clothes
           </button>
