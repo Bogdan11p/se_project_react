@@ -1,5 +1,11 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../Fonts/CabinetGrotesk-Regular.otf");
+}
+
 .weather {
   position: relative;
+  margin: 15px 15px;
 }
 
 .weather-info {
@@ -8,12 +14,13 @@
   left: 16px;
   color: white;
   font-size: 36px;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .weather_image {
   width: 100%;
-}
-
-.main {
-  padding: 0 20px;
 }

@@ -1,4 +1,10 @@
 import "../Header/Header.css";
+
+const currentDate = new Date().toLocaleString("default", {
+  month: "long",
+  day: "numeric",
+});
+
 const Header = ({ onCreateModal }) => {
   return (
     <header className="header">
@@ -6,15 +12,21 @@ const Header = ({ onCreateModal }) => {
         <div>
           <img src={require("../images/logo.svg").default} alt="logo" />
         </div>
-        <div>Date</div>
+        <p className="header__date" id="currentDate">
+          {currentDate} Roman, Romania
+        </p>
       </div>
       <div className="header__avatar-logo">
         <div>
-          <button type="text" onClick={onCreateModal}>
-            + Add New Clothes
+          <button
+            className="header_add-button"
+            type="text"
+            onClick={onCreateModal}
+          >
+            + Add Clothes
           </button>
         </div>
-        <div>Name</div>
+        <div>Bogdan Pintilie</div>
         <div>
           <img src={require("../images/avatar.svg").default} alt="avatar" />
         </div>
