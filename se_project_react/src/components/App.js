@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import ItemModal from "../ItemModal/ItemModal";
 
 function App() {
   const weatherTemp = "69°F";
@@ -12,6 +13,7 @@ function App() {
 
   const handleSelectedCard = (card) => {
     setSelectedCard(card);
+    setActiveModal("preview");
   };
 
   const handleCreateModal = () => {
@@ -72,13 +74,7 @@ function App() {
       )}
 
       {activeModal === "preview" && (
-        <div className={`modal`}>
-          <div className="modal_content">
-            <img />
-            <div>Text for item name</div>
-            <div>Weather type</div>
-          </div>
-        </div>
+        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
       )}
     </div>
   );
