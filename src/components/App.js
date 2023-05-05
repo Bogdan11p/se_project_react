@@ -5,7 +5,7 @@ import Main from "../Main/Main";
 import Footer from "../footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
-import { getForecastWeather, parseWeatherData } from "../util/WeatherApi";
+import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 
 function App() {
   const weatherTemp = "69°F";
