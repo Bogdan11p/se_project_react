@@ -1,3 +1,5 @@
+import "../blocks/ItemModal.css";
+
 const ItemModal = ({ selectedCard, onClose }) => {
   return (
     <div className={`modal`}>
