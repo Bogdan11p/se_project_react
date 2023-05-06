@@ -1,4 +1,4 @@
-import "../Header/Header.css";
+import "../blocks/Header.css";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",

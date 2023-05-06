@@ -1,4 +1,4 @@
-import "../WeatherCard/WeatherCard.css";
+import "../blocks/WeatherCard.css";
 
 const weatherOptions = [
   {

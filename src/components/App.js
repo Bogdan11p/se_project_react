@@ -1,10 +1,10 @@
 import React from "react";
 import "../blocks/App.css";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import Footer from "../footer/Footer";
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import ItemModal from "../ItemModal/ItemModal";
+import Header from "../components/Header";
+import Main from "../components/Main";
+import Footer from "../components/Footer";
+import ModalWithForm from "../components/ModalWithForm";
+import ItemModal from "../components/ItemModal";
 import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 
 function App() {
