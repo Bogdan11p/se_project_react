@@ -10,7 +10,11 @@ const ItemModal = ({ selectedCard, onClose }) => {
           onClick={onClose}
           aria-label="Close"
         ></button>
-        <img className="modal_image" src={selectedCard.link} />
+        <img
+          className="modal_image"
+          src={selectedCard.link}
+          alt={selectedCard.name}
+        />
         <div className="modal_subcontainer">
           <div>
             <h2 className="modal_title">{selectedCard.name}</h2>

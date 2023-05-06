@@ -27,11 +27,15 @@ function App() {
   };
 
   React.useEffect(() => {
-    getForecastWeather().then((data) => {
-      const temperature = parseWeatherData(data);
+    getForecastWeather()
+      .then((data) => {
+        const temperature = parseWeatherData(data);
 
-      setTemp(temperature);
-    });
+        setTemp(temperature);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
