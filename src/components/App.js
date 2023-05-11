@@ -41,6 +41,7 @@ function App() {
   return (
     <div>
       <Header onCreateModal={handleCreateModal} />
+
       <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
       <Footer />
       {activeModal === "create" && (
