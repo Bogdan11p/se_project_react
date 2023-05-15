@@ -3,12 +3,20 @@ import React, { useContext, useEffect, useState } from "react";
 import "../blocks/TempSwitch.css";
 
 const ToggleSwitch = () => {
-  const [currentTempUnit, handleToggleSwitch] = useContext(
+  const { currentTempUnit, handleToggleSwitch } = useContext(
     CurrentTempUnitContext
   );
 
   const [isChecked, setIsChecked] = useState(currentTempUnit === "C");
-  useEffect(() => setIsChecked(currentTempUnit === "C"), [currentTempUnit]);
+
+  useEffect(() => {
+    setIsChecked(currentTempUnit === "C");
+  }, [currentTempUnit]);
+
+  const handleSwitchChange = () => {
+    setIsChecked(!isChecked);
+    handleToggleSwitch();
+  };
 
   return (
     <div className="switch">
@@ -16,9 +24,8 @@ const ToggleSwitch = () => {
         className="switch__input"
         type="checkbox"
         name="switch-checkbox"
-        value={currentTempUnit}
         id="switch"
-        onChange={handleToggleSwitch}
+        onChange={handleSwitchChange}
         checked={isChecked}
       ></input>
       <label className="switch__label">

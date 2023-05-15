@@ -1,7 +1,7 @@
 import "../blocks/Header.css";
 import headerLogo from "../images/logo.svg";
 import headerAvatar from "../images/avatar.svg";
-
+import React from "react";
 import ToggleSwitch from "../components/TempSwitch";
 
 const currentDate = new Date().toLocaleString("default", {
@@ -16,12 +16,13 @@ const Header = ({ onCreateModal }) => {
         <div>
           <img src={headerLogo} alt="logo" />
         </div>
+
         <p className="header__date" id="currentDate">
           {currentDate} Roman, Romania
         </p>
       </div>
       <div className="header__avatar-logo">
-        <div>
+        <div className="header__right">
           <ToggleSwitch />
           <button
             className="header_add-button"

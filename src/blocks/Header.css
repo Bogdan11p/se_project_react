@@ -33,3 +33,8 @@
   background-color: white;
   cursor: pointer;
 }
+
+.header__right {
+  display: flex;
+  justify-content: space-between;
+}
