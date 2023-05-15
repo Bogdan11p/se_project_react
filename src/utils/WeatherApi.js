@@ -24,3 +24,8 @@ export const parseWeatherData = (data) => {
 
   return Math.ceil(temperature);
 };
+
+export const temperature = (temp) => ({
+  F: `${Math.round(temp)}°F`,
+  C: `${Math.round(((temp - 32) * 5) / 9)}°C`,
+});
