@@ -4,17 +4,27 @@ import Header from "../components/Header";
 import Main from "../components/Main";
 import Footer from "../components/Footer";
 import ModalWithForm from "../components/ModalWithForm";
-import ItemModal from "../components/ItemModal";
-import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 
+import AddItemModal from "../components/AddItemModal";
+import Profile from "./Profile";
+import { defaultClothingItems } from "../utils/constants";
+import ItemModal from "../components/ItemModal";
+import { HashRouter, Route } from "react-router-dom";
+import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
+import "../blocks/WeatherCard.css";
 import CurrentTempUnitContext from "../contexts/CurrentTempUnitContext";
 
 function App() {
   const weatherTemp = "69°F";
-  const [activeModal, setActiveModal] = React.useState("");
-  const [selectedCard, setSelectedCard] = React.useState({});
-  const [temp, setTemp] = React.useState(0);
+  const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
+  const [temp, setTemp] = useState(0);
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
+  const [newItem, setNewItem] = useState({});
+  const [prevItems, setPrevItems] = useState([]);
+  const [weatherData, setWeatherData] = useState([]);
+  const [weatherImage, setWeatherImage] = useState("");
 
   const handleSelectedCard = (card) => {
     setSelectedCard(card);
@@ -23,6 +33,9 @@ function App() {
 
   const handleCreateModal = () => {
     setActiveModal("create");
+    setClothingItems(prevItems);
+    setPrevItems([]);
+    setNewItem({});
   };
 
   const handleCloseModal = () => {
@@ -47,65 +60,116 @@ function App() {
     });
   };
 
+  const handleAddItemSubmit = (name, link, weatherChange) => {
+    const newItem = {
+      id: Date.now(),
+      name,
+      link,
+      weather: weatherChange,
+    };
+    setClothingItems((prevItems) => [...prevItems, newItem]);
+    handleCloseModal();
+  };
+
+  const handleDelete = (itemId) => {
+    setClothingItems((prevItems) => prevItems.filter((x) => x.id !== itemId));
+  };
+
   return (
     <div className="page">
-      <CurrentTempUnitContext.Provider
-        value={{ currentTempUnit, handleToggleSwitchChange }}
-      >
-        <Header onCreateModal={handleCreateModal} />
-
-        <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
-
-        <Footer />
-        {activeModal === "create" && (
-          <ModalWithForm title="New Garment" onClose={handleCloseModal}>
-            <div className="modal_label-container">
-              <label className="modal_label">
-                Name
-                <input
-                  type="text"
-                  name="name"
-                  minLength="1"
-                  maxLength="30"
-                  placeholder="Name"
-                  className="modal_input"
-                />
-              </label>
-              <label className="modal_label">
-                Image
-                <input
-                  type="url"
-                  name="link"
-                  minLength="1"
-                  maxLength="30"
-                  placeholder="Image URL"
-                  className="modal_input"
-                  required
-                />
-              </label>
-            </div>
-            <p className="modal_weather-type">Select the weather type:</p>
-            <div>
-              <div>
-                <input type="radio" id="hot" value="hot" name="rangeOfTemp" />
-                <label className="modal_temp-ranges">Hot</label>
+      <HashRouter>
+        <CurrentTempUnitContext.Provider
+          value={{ currentTempUnit, handleToggleSwitchChange }}
+        >
+          <Header onCreateModal={handleCreateModal} />
+          <Route exact path="/">
+            <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+          </Route>
+          <Route path="/profile">
+            <Profile
+              onCreateModal={handleCreateModal}
+              items={[...clothingItems, ...defaultClothingItems]}
+              onSelectCard={handleSelectedCard}
+            />
+          </Route>
+          <Footer />
+          {activeModal === "create" && (
+            <ModalWithForm
+              title="New Garment"
+              onClose={handleCloseModal}
+              onSubmit={handleAddItemSubmit}
+            >
+              <div className="modal_label-container">
+                <label className="modal_label">
+                  Name
+                  <input
+                    type="text"
+                    name="name"
+                    minLength="1"
+                    maxLength="30"
+                    placeholder="Name"
+                    className="modal_input"
+                  />
+                </label>
+                <label className="modal_label">
+                  Image
+                  <input
+                    type="url"
+                    name="link"
+                    minLength="1"
+                    maxLength="30"
+                    placeholder="Image URL"
+                    className="modal_input"
+                    required
+                  />
+                </label>
               </div>
+              <p className="modal_weather-type">Select the weather type:</p>
               <div>
-                <input type="radio" id="warm" value="warm" name="rangeOfTemp" />
-                <label className="modal_temp-ranges">Warm</label>
+                <div>
+                  <input type="radio" id="hot" value="hot" name="rangeOfTemp" />
+                  <label className="modal_temp-ranges">Hot</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="warm"
+                    value="warm"
+                    name="rangeOfTemp"
+                  />
+                  <label className="modal_temp-ranges">Warm</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="cold"
+                    value="cold"
+                    name="rangeOfTemp"
+                  />
+                  <label className="modal_temp-ranges">Cold</label>
+                </div>
               </div>
-              <div>
-                <input type="radio" id="cold" value="cold" name="rangeOfTemp" />
-                <label className="modal_temp-ranges">Cold</label>
-              </div>
-            </div>
-          </ModalWithForm>
-        )}
+            </ModalWithForm>
+          )}
 
-        {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
-        )}
-      </CurrentTempUnitContext.Provider>
+          {activeModal === "preview" && (
+            <ItemModal
+              selectedCard={selectedCard}
+              onClose={handleCloseModal}
+              onDelete={handleDelete}
+            />
+          )}
+          {activeModal === "addItem" && (
+            <AddItemModal
+              title="New Garment"
+              name="add"
+              onClose={handleCloseModal}
+              isOpen={handleCreateModal}
+              onAddItem={handleAddItemSubmit}
+            />
+          )}
+        </CurrentTempUnitContext.Provider>
+      </HashRouter>
     </div>
   );
 }

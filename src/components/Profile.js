@@ -1,11 +1,11 @@
-import React from "react";
+import "../blocks/Profile.css";
+
+import React, { useState } from "react";
 import SideBar from "./SideBar";
 import ClothesSection from "./ClothesSection";
 /* import ItemCard from "./ItemCard"; */
-import "../blocks/Profile.css";
-import "../blocks/Page.css";
 
-const Profile = ({ items, onSelectCard }) => {
+const Profile = ({ items, onSelectCard, onCreateModal }) => {
   const handleCardClick = (x) => {
     onSelectCard(x);
 
@@ -19,7 +19,11 @@ const Profile = ({ items, onSelectCard }) => {
           <SideBar />
         </div>
         <div className="profile__clothes-section">
-          <ClothesSection cards={items} onCardClick={handleCardClick} />
+          <ClothesSection
+            cards={items}
+            onCardClick={handleCardClick}
+            onClick={onCreateModal}
+          />
         </div>
       </div>
     </div>

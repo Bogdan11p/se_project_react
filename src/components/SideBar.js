@@ -7,7 +7,7 @@ const SideBar = () => {
     <div className="sidebar">
       <div className="sidebar__container">
         <img src={headerAvatar} className="sidebar__avatar" alt="avatar" />
-        <div className="sidebar__name">Phillippe Louis</div>
+        <div className="sidebar__name">Bogdan Pintilie</div>
       </div>
     </div>
   );

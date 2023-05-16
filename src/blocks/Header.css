@@ -18,11 +18,14 @@
 
 .header__left {
   grid-gap: 24px;
-  display: grid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* display: grid;
   gap: 24px;
   grid-template-columns: auto;
   grid-template-rows: 40px;
-  margin: 0 0 0 40px;
+  margin: 0 0 0 40px; */
 }
 
 .header__logo {
@@ -46,4 +49,6 @@
 .header__right {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
