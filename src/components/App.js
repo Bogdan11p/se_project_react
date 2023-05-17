@@ -13,6 +13,8 @@ import { HashRouter, Route } from "react-router-dom";
 import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 import "../blocks/WeatherCard.css";
 import CurrentTempUnitContext from "../contexts/CurrentTempUnitContext";
+import removeItem from "../utils/itemsApi";
+import itemsApi from "../utils/itemsApi";
 
 function App() {
   const weatherTemp = "69°F";
@@ -25,6 +27,7 @@ function App() {
   const [prevItems, setPrevItems] = useState([]);
   const [weatherData, setWeatherData] = useState([]);
   const [weatherImage, setWeatherImage] = useState("");
+  const [ConfirmationModal, setConfirmationModal] = useState("");
 
   const handleSelectedCard = (card) => {
     setSelectedCard(card);
@@ -33,6 +36,7 @@ function App() {
 
   const handleCreateModal = () => {
     setActiveModal("create");
+    setConfirmationModal("confirmation");
     setClothingItems(prevItems);
     setPrevItems([]);
     setNewItem({});
@@ -72,6 +76,13 @@ function App() {
   };
 
   const handleDelete = (itemId) => {
+    removeItem(itemId)
+      .then((response) => {
+        console.log("Item deleted successfully", response);
+      })
+      .catch((error) => {
+        console.error("Error deleting item", error);
+      });
     setClothingItems((prevItems) => prevItems.filter((x) => x.id !== itemId));
   };
 
@@ -93,7 +104,7 @@ function App() {
             />
           </Route>
           <Footer />
-          {activeModal === "create" && (
+          {/* {activeModal === "create" && (
             <ModalWithForm
               title="New Garment"
               onClose={handleCloseModal}
@@ -150,7 +161,7 @@ function App() {
                 </div>
               </div>
             </ModalWithForm>
-          )}
+          )} */}
 
           {activeModal === "preview" && (
             <ItemModal
@@ -159,7 +170,7 @@ function App() {
               onDelete={handleDelete}
             />
           )}
-          {activeModal === "addItem" && (
+          {activeModal === "create" && (
             <AddItemModal
               title="New Garment"
               name="add"
@@ -168,6 +179,15 @@ function App() {
               onAddItem={handleAddItemSubmit}
             />
           )}
+          {/* {ConfirmationModal === "confirmation" && (
+            <AddItemModal
+              title="New Garment"
+              name="add"
+              onClose={handleCloseModal}
+              isOpen={handleCreateModal}
+              onAddItem={handleAddItemSubmit}
+            />
+          )} */}
         </CurrentTempUnitContext.Provider>
       </HashRouter>
     </div>

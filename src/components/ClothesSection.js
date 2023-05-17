@@ -2,7 +2,7 @@ import React from "react";
 import "../blocks/ClothesSection.css";
 import ItemCard from "./ItemCard";
 
-const ClothesSection = ({ cards, onCardClick, onCreateModal }) => {
+const ClothesSection = ({ cards, onCardClick, onAddClick }) => {
   return (
     <div className="clothes">
       <div className="clothes__container">
@@ -12,7 +12,7 @@ const ClothesSection = ({ cards, onCardClick, onCreateModal }) => {
         className="clothes__button"
         type="button"
         aria-label="Add"
-        onClick={onCreateModal}
+        onClick={onAddClick}
       >
         + Add new
       </button>

@@ -13,10 +13,10 @@ const ToggleSwitch = () => {
     setIsChecked(currentTempUnit === "C");
   }, [currentTempUnit]);
 
-  const handleSwitchChange = () => {
+  /* const handleSwitchChange = () => {
     setIsChecked(!isChecked);
     handleToggleSwitch();
-  };
+  }; */
 
   return (
     <div className="switch">
@@ -25,8 +25,7 @@ const ToggleSwitch = () => {
         type="checkbox"
         name="switch-checkbox"
         id="switch"
-        onChange={handleSwitchChange}
-        checked={isChecked}
+        onChange={handleToggleSwitch}
       ></input>
       <label className="switch__label">
         <span className="switch__button">

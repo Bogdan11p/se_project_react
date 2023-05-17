@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import ClothesSection from "./ClothesSection";
 /* import ItemCard from "./ItemCard"; */
 
-const Profile = ({ items, onSelectCard, onCreateModal }) => {
+const Profile = ({ items, onSelectCard }) => {
   const handleCardClick = (x) => {
     onSelectCard(x);
 
@@ -19,11 +19,7 @@ const Profile = ({ items, onSelectCard, onCreateModal }) => {
           <SideBar />
         </div>
         <div className="profile__clothes-section">
-          <ClothesSection
-            cards={items}
-            onCardClick={handleCardClick}
-            onClick={onCreateModal}
-          />
+          <ClothesSection cards={items} onCardClick={handleCardClick} />
         </div>
       </div>
     </div>

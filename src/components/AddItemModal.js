@@ -35,7 +35,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       onClose={onClose}
       onSubmit={handleAddItemSubmit}
     >
-      <fieldset className="modal__fieldset">
+      <div className="modal__label-container">
         <label className="modal__label">
           Name
           <input
@@ -43,6 +43,8 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             type="text"
             placeholder="Name"
             required
+            minLength="1"
+            maxLength="30"
             name="name"
             id="input-name"
             value={name}
@@ -53,6 +55,8 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           Image
           <input
             className="modal__input"
+            minLength="1"
+            maxLength="30"
             type="url"
             placeholder="Image Url"
             required
@@ -62,43 +66,43 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             onChange={(e) => setImageUrl(e.target.value)}
           />
         </label>
-        <p className="modal__text">Select the weather type:</p>
-        <div className="modal__input-container">
-          <div>
-            <input
-              className="modal__input-button"
-              type="radio"
-              id="hot"
-              value="hot"
-              name="rangeOfTemp"
-              onChange={handleWeatherChange}
-            />
-            <label className="modal__temp-ranges">Hot</label>
-          </div>
-          <div>
-            <input
-              className="modal__input-button"
-              type="radio"
-              id="warm"
-              value="warm"
-              name="rangeOfTemp"
-              onChange={handleWeatherChange}
-            />
-            <label className="modal__temp-ranges">Warm</label>
-          </div>
-          <div>
-            <input
-              className="modal__input-button"
-              type="radio"
-              id="cold"
-              value="cold"
-              name="rangeOfTemp"
-              onChange={handleWeatherChange}
-            />
-            <label className="modal__temp-ranges">Cold</label>
-          </div>
+      </div>
+      <p className="modal_weather-type">Select the weather type:</p>
+      <div>
+        <div>
+          <input
+            className="modal__input-button"
+            type="radio"
+            id="hot"
+            value="hot"
+            name="rangeOfTemp"
+            onChange={handleWeatherChange}
+          />
+          <label className="modal__temp-ranges">Hot</label>
         </div>
-      </fieldset>
+        <div>
+          <input
+            className="modal__input-button"
+            type="radio"
+            id="warm"
+            value="warm"
+            name="rangeOfTemp"
+            onChange={handleWeatherChange}
+          />
+          <label className="modal__temp-ranges">Warm</label>
+        </div>
+        <div>
+          <input
+            className="modal__input-button"
+            type="radio"
+            id="cold"
+            value="cold"
+            name="rangeOfTemp"
+            onChange={handleWeatherChange}
+          />
+          <label className="modal__temp-ranges">Cold</label>
+        </div>
+      </div>
     </ModalWithForm>
   );
 };
