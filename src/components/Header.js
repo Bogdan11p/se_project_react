@@ -2,8 +2,9 @@ import "../blocks/Header.css";
 import headerLogo from "../images/logo.svg";
 import headerAvatar from "../images/avatar.svg";
 import React from "react";
-import ToggleSwitch from "../components/TempSwitch";
+/* import ToggleSwitch from "../components/TempSwitch"; */
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
+import { ToggleSwitch } from "../components/TempSwitch";
 
 const currentDate = new Date().toLocaleString("default", {
   month: "long",

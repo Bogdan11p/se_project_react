@@ -53,15 +53,7 @@
   height: 100%;
   font-size: 14px;
   font-weight: 700;
-  display: flex;
-  justify-content: space-between;
 }
-
-/* .switch__slider-F {
-} */
-
-/* .switch__slider-C {
-} */
 
 .switch__temp-F {
   z-index: 100;
@@ -99,18 +91,6 @@
 }
 
 .switch__active {
-  /* z-index: 100;
-  right: 2px; */
   font-size: 15px;
-  /* position: absolute; */
-}
-
-.switch__C {
-  margin: 5px;
-  padding-right: 3px;
-}
-
-.switch__F {
-  margin: 5px;
-  padding-right: 3px;
+  color: #fff;
 }

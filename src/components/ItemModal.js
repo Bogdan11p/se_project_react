@@ -2,7 +2,7 @@ import "../blocks/ItemModal.css";
 import "../components/ModalWithForm";
 import React, { useState } from "react";
 
-const ItemModal = ({ selectedCard, onClose, onDelete }) => {
+const ItemModal = ({ selectCard, onClose, onDelete }) => {
   const [ConfirmationModal, setConfirmationModal] = useState(false);
 
   const handleOpenConfirmationModal = () => {
@@ -14,7 +14,7 @@ const ItemModal = ({ selectedCard, onClose, onDelete }) => {
   };
 
   const handleDelete = () => {
-    onDelete(selectedCard.id);
+    onDelete(selectCard.id);
 
     handleCloseConfirmationModal();
   };
@@ -30,15 +30,13 @@ const ItemModal = ({ selectedCard, onClose, onDelete }) => {
         ></button>
         <img
           className="modal_image"
-          src={selectedCard.link}
-          alt={selectedCard.name}
+          src={selectCard.link}
+          alt={selectCard.name}
         />
         <div className="modal_subcontainer">
           <div>
-            <h2 className="modal_title">{selectedCard.name}</h2>
-            <p className="modal_weather">
-              Weather type: {selectedCard.weather}
-            </p>
+            <h2 className="modal_title">{selectCard.name}</h2>
+            <p className="modal_weather">Weather type: {selectCard.weather}</p>
           </div>
           <button
             className="modal__delete"

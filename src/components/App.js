@@ -13,13 +13,13 @@ import { HashRouter, Route } from "react-router-dom";
 import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 import "../blocks/WeatherCard.css";
 import CurrentTempUnitContext from "../contexts/CurrentTempUnitContext";
-import removeItem from "../utils/itemsApi";
+
 import itemsApi from "../utils/itemsApi";
 
 function App() {
   const weatherTemp = "69°F";
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
+  const [selectCard, setSelectCard] = useState({});
   const [temp, setTemp] = useState(0);
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
@@ -27,16 +27,15 @@ function App() {
   const [prevItems, setPrevItems] = useState([]);
   const [weatherData, setWeatherData] = useState([]);
   const [weatherImage, setWeatherImage] = useState("");
-  const [ConfirmationModal, setConfirmationModal] = useState("");
 
-  const handleSelectedCard = (card) => {
-    setSelectedCard(card);
+  const handleSelectCard = (card) => {
+    setSelectCard(card);
     setActiveModal("preview");
   };
 
   const handleCreateModal = () => {
     setActiveModal("create");
-    setConfirmationModal("confirmation");
+
     setClothingItems(prevItems);
     setPrevItems([]);
     setNewItem({});
@@ -64,26 +63,37 @@ function App() {
     });
   };
 
-  const handleAddItemSubmit = (name, link, weatherChange) => {
+  const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
     const newItem = {
       id: Date.now(),
       name,
-      link,
-      weather: weatherChange,
+      link: imageUrl,
+      weather,
     };
-    setClothingItems((prevItems) => [...prevItems, newItem]);
-    handleCloseModal();
+    itemsApi
+      .add(newItem.name, newItem.link, newItem.weather)
+      .then((response) => {
+        console.log("Item added:", response);
+        setClothingItems((prevItems) => [...prevItems, newItem]);
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
   };
 
   const handleDelete = (itemId) => {
-    removeItem(itemId)
-      .then((response) => {
-        console.log("Item deleted successfully", response);
+    itemsApi
+      .remove(itemId)
+      .then(() => {
+        console.log("Item deleted successfully");
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item.id !== itemId)
+        );
       })
       .catch((error) => {
-        console.error("Error deleting item", error);
+        console.log("Error deleting item:", error);
       });
-    setClothingItems((prevItems) => prevItems.filter((x) => x.id !== itemId));
   };
 
   return (
@@ -94,78 +104,20 @@ function App() {
         >
           <Header onCreateModal={handleCreateModal} />
           <Route exact path="/">
-            <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+            <Main weatherTemp={temp} onSelectCard={handleSelectCard} />
           </Route>
           <Route path="/profile">
             <Profile
               onCreateModal={handleCreateModal}
               items={[...clothingItems, ...defaultClothingItems]}
-              onSelectCard={handleSelectedCard}
+              onSelectCard={handleSelectCard}
             />
           </Route>
           <Footer />
-          {/* {activeModal === "create" && (
-            <ModalWithForm
-              title="New Garment"
-              onClose={handleCloseModal}
-              onSubmit={handleAddItemSubmit}
-            >
-              <div className="modal_label-container">
-                <label className="modal_label">
-                  Name
-                  <input
-                    type="text"
-                    name="name"
-                    minLength="1"
-                    maxLength="30"
-                    placeholder="Name"
-                    className="modal_input"
-                  />
-                </label>
-                <label className="modal_label">
-                  Image
-                  <input
-                    type="url"
-                    name="link"
-                    minLength="1"
-                    maxLength="30"
-                    placeholder="Image URL"
-                    className="modal_input"
-                    required
-                  />
-                </label>
-              </div>
-              <p className="modal_weather-type">Select the weather type:</p>
-              <div>
-                <div>
-                  <input type="radio" id="hot" value="hot" name="rangeOfTemp" />
-                  <label className="modal_temp-ranges">Hot</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="warm"
-                    value="warm"
-                    name="rangeOfTemp"
-                  />
-                  <label className="modal_temp-ranges">Warm</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    id="cold"
-                    value="cold"
-                    name="rangeOfTemp"
-                  />
-                  <label className="modal_temp-ranges">Cold</label>
-                </div>
-              </div>
-            </ModalWithForm>
-          )} */}
 
           {activeModal === "preview" && (
             <ItemModal
-              selectedCard={selectedCard}
+              selectCard={selectCard}
               onClose={handleCloseModal}
               onDelete={handleDelete}
             />
@@ -179,15 +131,6 @@ function App() {
               onAddItem={handleAddItemSubmit}
             />
           )}
-          {/* {ConfirmationModal === "confirmation" && (
-            <AddItemModal
-              title="New Garment"
-              name="add"
-              onClose={handleCloseModal}
-              isOpen={handleCreateModal}
-              onAddItem={handleAddItemSubmit}
-            />
-          )} */}
         </CurrentTempUnitContext.Provider>
       </HashRouter>
     </div>
