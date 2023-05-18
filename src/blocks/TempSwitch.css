@@ -2,19 +2,27 @@
   display: flex;
   grid-column: 1/1;
   grid-row: 1/1;
+  position: absolute;
 }
 
 .switch__input {
-  height: 0px;
-  width: 0px;
-  visibility: hidden;
-  margin: 0;
-  padding: 0;
-  border: none;
+  z-index: 2;
+  display: flex;
+  border-radius: 20px;
+  appearance: none;
+  cursor: pointer;
+  border: 2px solid #7e7e7e;
+  width: 40px;
+  height: 20px;
+  outline: none;
+  position: relative;
+  right: 56px;
+  top: 2px;
 }
 
 .switch__label {
   display: flex;
+  z-index: 1;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
@@ -25,6 +33,7 @@
   position: relative;
   transition: background-color 0.2s;
   border: 2px solid #7e7e7e;
+  right: 110px;
 }
 
 .switch__button {

@@ -82,17 +82,17 @@ function App() {
       });
   };
 
-  const handleDelete = (itemId) => {
+  const handleDelete = (id) => {
     itemsApi
-      .remove(itemId)
+      .remove(id)
       .then(() => {
-        console.log("Item deleted successfully");
+        console.log("Item deleted");
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item.id !== itemId)
+          prevItems.filter((itemsId) => itemsId !== itemsId)
         );
       })
       .catch((error) => {
-        console.log("Error deleting item:", error);
+        console.log("Error:", error);
       });
   };
 

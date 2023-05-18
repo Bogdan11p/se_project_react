@@ -15,8 +15,7 @@ export const ToggleSwitch = () => {
         type="checkbox"
         name="switch-checkbox"
         id="switch"
-        checked={isChecked}
-        onChange={handleToggleSwitchChange}
+        onClick={handleToggleSwitchChange}
       ></input>
 
       <label className="switch__label">
