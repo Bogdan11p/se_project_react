@@ -1,6 +1,6 @@
 import "../blocks/ItemModal.css";
 import "../components/ModalWithForm";
-import React, { useState } from "react";
+import React from "react";
 
 const ItemModal = ({
   selectCard,

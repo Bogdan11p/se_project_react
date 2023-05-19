@@ -4,7 +4,6 @@ import "../blocks/DeleteConfirmationModal.css";
 import Header from "../components/Header";
 import Main from "../components/Main";
 import Footer from "../components/Footer";
-import ModalWithForm from "../components/ModalWithForm";
 
 import AddItemModal from "../components/AddItemModal";
 import Profile from "./Profile";
@@ -18,7 +17,6 @@ import CurrentTempUnitContext from "../contexts/CurrentTempUnitContext";
 import itemsApi from "../utils/itemsApi";
 
 function App() {
-  const weatherTemp = "69°F";
   const [activeModal, setActiveModal] = useState("");
   const [selectCard, setSelectCard] = useState({});
   const [temp, setTemp] = useState(0);
@@ -26,8 +24,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [newItem, setNewItem] = useState({});
   const [prevItems, setPrevItems] = useState([]);
-  const [weatherData, setWeatherData] = useState([]);
-  const [weatherImage, setWeatherImage] = useState("");
+
   const [DeleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
 
   const handleOpenConfirmModal = () => {
@@ -77,14 +74,14 @@ function App() {
     const newItem = {
       id: Date.now(),
       name,
-      link: imageUrl,
+      imageUrl,
       weather,
     };
     itemsApi
-      .add(newItem.name, newItem.link, newItem.weather)
+      .add(newItem)
       .then((response) => {
         console.log("Item added:", response);
-        setClothingItems((prevItems) => [...prevItems, newItem]);
+        setClothingItems((items) => [response, ...items]);
         handleCloseModal();
       })
       .catch((error) => {
@@ -92,14 +89,12 @@ function App() {
       });
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = (itemId) => {
     itemsApi
-      .remove(id)
+      .remove(itemId)
       .then(() => {
         console.log("Item deleted");
-        setClothingItems((prevItems) =>
-          prevItems.filter((itemsId) => itemsId !== itemsId)
-        );
+        setClothingItems((i) => i.filter((x) => x.id !== itemId));
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -161,6 +156,7 @@ function App() {
                       type="button"
                       aria-label="Confirm"
                       onClick={handleDelete}
+                      onClick={handleCloseConfirmModal}
                     >
                       Yes, delete item
                     </button>
