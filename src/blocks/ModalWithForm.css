@@ -40,7 +40,7 @@
   cursor: pointer;
 }
 
-.modal_input {
+.modal__input {
   border-top: none;
   border-left: none;
   border-right: none;
@@ -68,19 +68,19 @@
   border-radius: 4px;
 }
 
-.modal_fieldset {
-  border: none;
-}
-
-.modal_label-container {
+.modal__label-container {
   display: flex;
   flex-direction: column;
 }
 
-.modal_label {
+.modal__label {
   padding-top: 24px;
 }
 
 .modal_weather-type {
   padding-top: 24px;
+}
+
+.modal_fieldset {
+  border: none;
 }

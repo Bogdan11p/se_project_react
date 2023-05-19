@@ -1,1 +1,63 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../vendor/Fonts/CabinetGrotesk-Regular.otf");
+}
 
+.modal_subcontainer {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.modal__delete {
+  width: 101px;
+  height: 24px;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  color: #ff4d00;
+  background-color: white;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.modal__button_confirm {
+  border: none;
+  color: #ff4d00;
+  background-color: white;
+  cursor: pointer;
+}
+
+.modal__button_cancel {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.modal__confirmation_buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__confirmation_close {
+  background-image: url("../images/close-button.svg");
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: none;
+  top: 10px;
+  right: 5px;
+  cursor: pointer;
+}
+
+.modal__text_confirmation {
+  align-items: center;
+}
+
+.modal__confirmation {
+  display: flex;
+  flex-direction: column;
+}

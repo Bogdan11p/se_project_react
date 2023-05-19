@@ -16,6 +16,18 @@
   line-height: 20px;
 }
 
+.header__left {
+  grid-gap: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* display: grid;
+  gap: 24px;
+  grid-template-columns: auto;
+  grid-template-rows: 40px;
+  margin: 0 0 0 40px; */
+}
+
 .header__logo {
   display: flex;
   gap: 20px;
@@ -30,6 +42,14 @@
 
 .header_add-button {
   border: none;
+  z-index: 3;
   background-color: white;
   cursor: pointer;
+}
+
+.header__right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }

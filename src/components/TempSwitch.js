@@ -2,25 +2,22 @@ import CurrentTempUnitContext from "../contexts/CurrentTempUnitContext";
 import React, { useContext, useEffect, useState } from "react";
 import "../blocks/TempSwitch.css";
 
-const ToggleSwitch = () => {
-  const [currentTempUnit, handleToggleSwitch] = useContext(
+export const ToggleSwitch = () => {
+  const { currentTempUnit, handleToggleSwitchChange } = useContext(
     CurrentTempUnitContext
   );
 
-  const [isChecked, setIsChecked] = useState(currentTempUnit === "C");
-  useEffect(() => setIsChecked(currentTempUnit === "C"), [currentTempUnit]);
-
+  const isChecked = currentTempUnit === "C";
   return (
     <div className="switch">
       <input
         className="switch__input"
         type="checkbox"
         name="switch-checkbox"
-        value={currentTempUnit}
         id="switch"
-        onChange={handleToggleSwitch}
-        checked={isChecked}
+        onClick={handleToggleSwitchChange}
       ></input>
+
       <label className="switch__label">
         <span className="switch__button">
           <div className="switch__container">
@@ -32,8 +29,8 @@ const ToggleSwitch = () => {
               }
             ></span>
             <p
-              className={`switch__F ${
-                currentTempUnit === "F" ? "switch__active-F" : ""
+              className={`switch__temp switch__temp-F ${
+                currentTempUnit === "F" ? "switch__active" : ""
               }`}
             >
               F
@@ -41,13 +38,13 @@ const ToggleSwitch = () => {
             <span
               className={
                 currentTempUnit === "C"
-                  ? "switch__slider-C"
-                  : "switch__slider-F"
+                  ? "switch__slider switch__slider-F"
+                  : "switch__slider switch__slider-C"
               }
-            ></span>
+            />
             <p
-              className={`switch__C ${
-                currentTempUnit === "C" ? "switch__active-C" : ""
+              className={`switch__temp switch__temp-C ${
+                currentTempUnit === "C" ? "switch__active" : ""
               }`}
             >
               C
