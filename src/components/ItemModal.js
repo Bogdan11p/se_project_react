@@ -19,7 +19,7 @@ const ItemModal = ({
         ></button>
         <img
           className="modal__image"
-          src={selectCard.link}
+          src={selectCard.link || selectCard.imageUrl}
           alt={selectCard.name}
         />
         <div className="modal__subcontainer">
