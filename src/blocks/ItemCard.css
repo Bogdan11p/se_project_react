@@ -19,6 +19,7 @@
   width: 328px;
   height: 328px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .card_items {

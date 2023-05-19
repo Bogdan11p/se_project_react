@@ -1,6 +1,6 @@
 import checkResponse from "./checkResponse";
-const baseUrl =
-  "https://my-json-server.typicode.com/Bogdan11p/se_project_react/";
+const baseUrl = "http://localhost:3001";
+/* "https://my-json-server.typicode.com/Bogdan11p/se_project_react/"; */
 
 const itemsApi = {
   get: () => {

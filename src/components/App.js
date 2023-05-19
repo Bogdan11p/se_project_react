@@ -156,7 +156,6 @@ function App() {
                       type="button"
                       aria-label="Confirm"
                       onClick={handleDelete}
-                      onClick={handleCloseConfirmModal}
                     >
                       Yes, delete item
                     </button>
