@@ -2,41 +2,30 @@ import "../blocks/ItemModal.css";
 import "../components/ModalWithForm";
 import React, { useState } from "react";
 
-const ItemModal = ({ selectCard, onClose, onDelete }) => {
-  const [ConfirmationModal, setConfirmationModal] = useState(false);
-
-  const handleOpenConfirmationModal = () => {
-    setConfirmationModal(true);
-  };
-
-  const handleCloseConfirmationModal = () => {
-    setConfirmationModal(false);
-  };
-
-  const handleDelete = () => {
-    onDelete(selectCard.id);
-
-    handleCloseConfirmationModal();
-  };
-
+const ItemModal = ({
+  selectCard,
+  onClose,
+  onDelete,
+  handleOpenConfirmationModal,
+}) => {
   return (
     <div className={`modal`}>
-      <div className="modal_content">
+      <div className="modal__content">
         <button
-          className="modal_close"
+          className="modal__close"
           type="button"
           onClick={onClose}
           aria-label="Close"
         ></button>
         <img
-          className="modal_image"
+          className="modal__image"
           src={selectCard.link}
           alt={selectCard.name}
         />
-        <div className="modal_subcontainer">
+        <div className="modal__subcontainer">
           <div>
-            <h2 className="modal_title">{selectCard.name}</h2>
-            <p className="modal_weather">Weather type: {selectCard.weather}</p>
+            <h2 className="modal__title">{selectCard.name}</h2>
+            <p className="modal__weather">Weather type: {selectCard.weather}</p>
           </div>
           <button
             className="modal__delete"
@@ -44,36 +33,6 @@ const ItemModal = ({ selectCard, onClose, onDelete }) => {
           >
             Delete
           </button>
-          {ConfirmationModal && (
-            <div className="modal__confirmation">
-              <p>Are you sure you want to delete this item?</p>
-              <p className="modal__text_confirmation">
-                This action is irreversible.
-              </p>
-              <button
-                className="modal__confirmation_close"
-                onClick={onClose}
-              ></button>
-              <div className="modal__confirmation_buttons">
-                <button
-                  className="modal__button_confirm"
-                  type="button"
-                  aria-label="Confirm"
-                  onClick={handleDelete}
-                >
-                  Yes, delete item
-                </button>
-                <button
-                  className="modal__button_cancel"
-                  type="button"
-                  aria-label="Cancel"
-                  onClick={handleCloseConfirmationModal}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

@@ -1,8 +1,6 @@
 .switch {
-<<<<<<< HEAD
-  z-index: 2;
-=======
->>>>>>> 919d241defda0ad7c656fb081ed46b5012271e60
+  z-index: 0;
+
   display: flex;
   grid-column: 1/1;
   grid-row: 1/1;
@@ -15,7 +13,7 @@
   border-radius: 20px;
   appearance: none;
   cursor: pointer;
-  border: 2px solid #7e7e7e;
+  border: none;
   width: 40px;
   height: 20px;
   outline: none;
@@ -43,7 +41,8 @@
 .switch__button {
   position: absolute;
   z-index: 0;
-  left: 1px;
+  left: 0;
+
   width: 28px;
   height: 28px;
   border-radius: 45px;
@@ -73,7 +72,7 @@
   color: #fff;
   position: absolute;
   left: 10px;
-  top: 0%;
+  top: 1px;
   bottom: 0%;
   font-family: "Cabinet Grotesk";
   font-style: normal;
@@ -83,6 +82,7 @@
   display: flex;
   align-items: center;
   text-align: center;
+  color: #7e7e7e;
 }
 
 .switch__temp-C {
@@ -90,8 +90,8 @@
   font-size: 14px;
   color: rgba(0, 0, 0, 0.5);
   position: absolute;
-  left: 34px;
-  top: 0%;
+  left: 36px;
+  top: 1px;
   bottom: 0%;
   /* font-family: "Cabinet Grotesk"; */
   font-style: normal;

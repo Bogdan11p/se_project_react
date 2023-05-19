@@ -19,38 +19,35 @@ export const ToggleSwitch = () => {
       ></input>
 
       <label className="switch__label">
-        <span className="switch__button">
-          <div className="switch__container">
-            <span
-              className={
-                currentTempUnit === "F"
-                  ? "switch__slider-F"
-                  : "switch__slider-C"
-              }
-            ></span>
-            <p
-              className={`switch__temp switch__temp-F ${
-                currentTempUnit === "F" ? "switch__active" : ""
-              }`}
-            >
-              F
-            </p>
-            <span
-              className={
-                currentTempUnit === "C"
-                  ? "switch__slider switch__slider-F"
-                  : "switch__slider switch__slider-C"
-              }
-            />
-            <p
-              className={`switch__temp switch__temp-C ${
-                currentTempUnit === "C" ? "switch__active" : ""
-              }`}
-            >
-              C
-            </p>
-          </div>
-        </span>
+        <div className="switch__container">
+          <span className="switch__button"></span>
+          <span
+            className={
+              currentTempUnit === "F" ? "switch__slider-F" : "switch__slider-C"
+            }
+          ></span>
+          <p
+            className={`switch__temp switch__temp-F ${
+              currentTempUnit === "F" ? "switch__active" : ""
+            }`}
+          >
+            F
+          </p>
+          <span
+            className={
+              currentTempUnit === "C"
+                ? "switch__slider switch__slider-F"
+                : "switch__slider switch__slider-C"
+            }
+          />
+          <p
+            className={`switch__temp switch__temp-C ${
+              currentTempUnit === "C" ? "switch__active" : ""
+            }`}
+          >
+            C
+          </p>
+        </div>
       </label>
     </div>
   );

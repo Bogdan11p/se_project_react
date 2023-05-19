@@ -8,19 +8,19 @@ const ModalWithForm = ({
   name,
 }) => {
   return (
-    <div className={`modal modal_type_${name}`}>
-      <div className="modal_content">
-        <form className="modal_form" name={name}>
-          <fieldset className="modal_fieldset">
+    <div className={`modal modal__type_${name}`}>
+      <div className="modal__content">
+        <form className="modal__form" name={name}>
+          <fieldset className="modal__fieldset">
             <button
-              className="modal_close"
+              className="modal__close"
               type="button"
               onClick={onClose}
               aria-label="Close"
             ></button>
-            <h2 className="modal_header">{title}</h2>
+            <h2 className="modal__header">{title}</h2>
             {children}
-            <button className="modal_submit" type="submit">
+            <button className="modal__submit" type="submit">
               {buttonText}
             </button>
           </fieldset>

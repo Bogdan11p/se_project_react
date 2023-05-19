@@ -15,7 +15,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal_content {
+.modal__content {
   position: relative;
   background-color: white;
   max-width: 496px;
@@ -29,7 +29,7 @@
   line-height: 20px;
 }
 
-.modal_close {
+.modal__close {
   background-image: url("../images/close-button.svg");
   position: absolute;
   right: 31px;
@@ -49,7 +49,7 @@
   padding-top: 8px;
 }
 
-.modal_submit {
+.modal__submit {
   margin-top: 42px;
   border-radius: 4px;
   height: 36px;
@@ -60,11 +60,11 @@
   cursor: pointer;
 }
 
-.modal_submit:hover {
+.modal__submit:hover {
   background: rgba(0, 0, 0, 0.6);
 }
 
-.modal_image {
+.modal__image {
   border-radius: 4px;
 }
 
@@ -77,10 +77,10 @@
   padding-top: 24px;
 }
 
-.modal_weather-type {
+.modal__weather-type {
   padding-top: 24px;
 }
 
-.modal_fieldset {
+.modal__fieldset {
   border: none;
 }

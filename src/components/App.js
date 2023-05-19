@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../blocks/App.css";
+import "../blocks/DeleteConfirmationModal.css";
 import Header from "../components/Header";
 import Main from "../components/Main";
 import Footer from "../components/Footer";
@@ -27,6 +28,15 @@ function App() {
   const [prevItems, setPrevItems] = useState([]);
   const [weatherData, setWeatherData] = useState([]);
   const [weatherImage, setWeatherImage] = useState("");
+  const [DeleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
+
+  const handleOpenConfirmModal = () => {
+    setDeleteConfirmationModal(true);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setDeleteConfirmationModal(false);
+  };
 
   const handleSelectCard = (card) => {
     setSelectCard(card);
@@ -114,12 +124,12 @@ function App() {
             />
           </Route>
           <Footer />
-
           {activeModal === "preview" && (
             <ItemModal
               selectCard={selectCard}
               onClose={handleCloseModal}
               onDelete={handleDelete}
+              handleOpenConfirmationModal={handleOpenConfirmModal}
             />
           )}
           {activeModal === "create" && (
@@ -131,6 +141,43 @@ function App() {
               onAddItem={handleAddItemSubmit}
             />
           )}
+          {DeleteConfirmationModal && (
+            <div className="modal">
+              <div className="modal__content">
+                <div className="modal__confirmation">
+                  <p className="modal__text_confirmation">
+                    Are you sure you want to delete this item?
+                  </p>
+                  <p className="modal__text_confirmation">
+                    This action is irreversible.
+                  </p>
+                  <button
+                    className="modal__confirmation_close"
+                    onClick={handleCloseConfirmModal}
+                  ></button>
+                  <div className="modal__confirmation_buttons">
+                    <button
+                      className="modal__button_confirm"
+                      type="button"
+                      aria-label="Confirm"
+                      onClick={handleDelete}
+                    >
+                      Yes, delete item
+                    </button>
+                    <button
+                      className="modal__button_cancel"
+                      type="button"
+                      aria-label="Cancel"
+                      onClick={handleCloseConfirmModal}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          ;
         </CurrentTempUnitContext.Provider>
       </HashRouter>
     </div>
