@@ -1,5 +1,4 @@
 import "../blocks/DeleteConfirmationModal.css";
-import { handleCloseConfirmationModal } from "../components/App";
 
 const DeleteConfirmationModal = ({
   onClick,

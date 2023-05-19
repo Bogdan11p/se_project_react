@@ -1,12 +1,13 @@
 import checkResponse from "./checkResponse";
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  "https://my-json-server.typicode.com/Bogdan11p/se_project_react";
 /* "https://my-json-server.typicode.com/Bogdan11p/se_project_react/"; */
 
 const itemsApi = {
   get: () => {
     return fetch(`${baseUrl}/items`).then(checkResponse);
   },
-  add: (name, imageUrl, weather) => {
+  add: ({ name, imageUrl, weather }) => {
     return fetch(`${baseUrl}/items`, {
       method: "POST",
       headers: {
@@ -19,7 +20,7 @@ const itemsApi = {
       }),
     }).then(checkResponse);
   },
-  remove: (id) => {
+  remove: ({ id }) => {
     return fetch(`${baseUrl}/items/${id}`, {
       method: "DELETE",
       headers: {

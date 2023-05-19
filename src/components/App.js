@@ -72,7 +72,6 @@ function App() {
 
   const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
     const newItem = {
-      id: Date.now(),
       name,
       imageUrl,
       weather,
@@ -156,6 +155,7 @@ function App() {
                       type="button"
                       aria-label="Confirm"
                       onClick={handleDelete}
+                      onClick={handleCloseConfirmModal}
                     >
                       Yes, delete item
                     </button>
