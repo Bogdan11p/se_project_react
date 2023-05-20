@@ -8,7 +8,7 @@ const DeleteConfirmationModal = ({
   onCancel,
 }) => {
   const handleDeleteClick = () => {
-    onDelete(handleDeleteClick);
+    onDelete(selectCard(x));
   };
 
   return (

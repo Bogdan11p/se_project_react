@@ -90,6 +90,7 @@ function App() {
 
   const handleDelete = (itemId) => {
     itemsApi
+
       .remove(itemId)
       .then(() => {
         console.log("Item deleted");
@@ -154,8 +155,8 @@ function App() {
                       className="modal__button_confirm"
                       type="button"
                       aria-label="Confirm"
-                      onClick={handleDelete}
-                      onClick={handleCloseConfirmModal}
+                      onClick={handleDelete && handleCloseConfirmModal}
+                      /* onClick={handleCloseConfirmModal} */
                     >
                       Yes, delete item
                     </button>

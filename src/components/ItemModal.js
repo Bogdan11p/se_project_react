@@ -2,12 +2,7 @@ import "../blocks/ItemModal.css";
 import "../components/ModalWithForm";
 import React from "react";
 
-const ItemModal = ({
-  selectCard,
-  onClose,
-  onDelete,
-  handleOpenConfirmationModal,
-}) => {
+const ItemModal = ({ selectCard, onClose, handleOpenConfirmationModal }) => {
   return (
     <div className={`modal`}>
       <div className="modal__content">
