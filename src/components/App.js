@@ -12,7 +12,7 @@ import ItemModal from "../components/ItemModal";
 import { HashRouter, Route } from "react-router-dom";
 import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 import "../blocks/WeatherCard.css";
-import CurrentTempUnitContext from "../contexts/CurrentTempUnitContext";
+import CurrentTempUnitContext from "../contexts/CurrentTemperatureUnitContext";
 
 import itemsApi from "../utils/itemsApi";
 

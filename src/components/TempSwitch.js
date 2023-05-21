@@ -1,4 +1,4 @@
-import CurrentTempUnitContext from "../contexts/CurrentTempUnitContext";
+import CurrentTempUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import React, { useContext, useEffect, useState } from "react";
 import "../blocks/TempSwitch.css";
 
