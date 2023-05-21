@@ -1,13 +1,13 @@
-import CurrentTempUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import React, { useContext, useEffect, useState } from "react";
 import "../blocks/TempSwitch.css";
 
 export const ToggleSwitch = () => {
-  const { currentTempUnit, handleToggleSwitchChange } = useContext(
-    CurrentTempUnitContext
+  const { currentTemperatureUnit, handleToggleSwitchChange } = useContext(
+    CurrentTemperatureUnitContext
   );
 
-  const isChecked = currentTempUnit === "C";
+  const isChecked = currenteratureTempUnit === "C";
   return (
     <div className="switch">
       <input
@@ -23,26 +23,28 @@ export const ToggleSwitch = () => {
           <span className="switch__button"></span>
           <span
             className={
-              currentTempUnit === "F" ? "switch__slider-F" : "switch__slider-C"
+              currentTemperatureUnit === "F"
+                ? "switch__slider-F"
+                : "switch__slider-C"
             }
           ></span>
           <p
             className={`switch__temp switch__temp-F ${
-              currentTempUnit === "F" ? "switch__active" : ""
+              currentTemperatureUnit === "F" ? "switch__active" : ""
             }`}
           >
             F
           </p>
           <span
             className={
-              currentTempUnit === "C"
+              currentTemperatureUnit === "C"
                 ? "switch__slider switch__slider-F"
                 : "switch__slider switch__slider-C"
             }
           />
           <p
             className={`switch__temp switch__temp-C ${
-              currentTempUnit === "C" ? "switch__active" : ""
+              currentTemperatureUnit === "C" ? "switch__active" : ""
             }`}
           >
             C

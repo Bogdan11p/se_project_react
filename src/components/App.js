@@ -12,7 +12,7 @@ import ItemModal from "../components/ItemModal";
 import { HashRouter, Route } from "react-router-dom";
 import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 import "../blocks/WeatherCard.css";
-import CurrentTempUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 
 import itemsApi from "../utils/itemsApi";
 
@@ -20,7 +20,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectCard, setSelectCard] = useState({});
   const [temp, setTemp] = useState(0);
-  const [currentTempUnit, setCurrentTempUnit] = useState("F");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [newItem, setNewItem] = useState({});
   const [prevItems, setPrevItems] = useState([]);
@@ -65,7 +65,7 @@ function App() {
   }, []);
 
   const handleToggleSwitchChange = () => {
-    setCurrentTempUnit((currentTempState) => {
+    setCurrenteratureTempUnit((currentTempState) => {
       return currentTempState === "C" ? "F" : "C";
     });
   };
@@ -105,7 +105,7 @@ function App() {
     <div className="page">
       <HashRouter>
         <CurrentTemperatureUnitContext.Provider
-          value={{ currentTempUnit, handleToggleSwitchChange }}
+          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <Header onCreateModal={handleCreateModal} />
           <Route exact path="/">
