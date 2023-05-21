@@ -104,7 +104,7 @@ function App() {
   return (
     <div className="page">
       <HashRouter>
-        <CurrentTempUnitContext.Provider
+        <CurrentTemperatureUnitContext.Provider
           value={{ currentTempUnit, handleToggleSwitchChange }}
         >
           <Header onCreateModal={handleCreateModal} />
@@ -174,7 +174,7 @@ function App() {
             </div>
           )}
           ;
-        </CurrentTempUnitContext.Provider>
+        </CurrentTemperatureUnitContext.Provider>
       </HashRouter>
     </div>
   );
