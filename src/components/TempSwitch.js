@@ -7,7 +7,7 @@ export const ToggleSwitch = () => {
     CurrentTemperatureUnitContext
   );
 
-  const isChecked = currenteratureTempUnit === "C";
+  const isChecked = currentTemperatureUnit === "C";
   return (
     <div className="switch">
       <input

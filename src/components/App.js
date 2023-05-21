@@ -65,7 +65,7 @@ function App() {
   }, []);
 
   const handleToggleSwitchChange = () => {
-    setCurrenteratureTempUnit((currentTempState) => {
+    setCurrentTemperatureUnit((currentTempState) => {
       return currentTempState === "C" ? "F" : "C";
     });
   };
