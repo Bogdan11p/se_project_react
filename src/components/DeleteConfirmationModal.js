@@ -1,6 +1,6 @@
 import "../blocks/DeleteConfirmationModal.css";
 
-const deleteConfirmationModal = ({
+const DeleteConfirmationModal = ({
   handleCloseConfirmModal,
   handleDelete,
   selectCard,
@@ -47,4 +47,4 @@ const deleteConfirmationModal = ({
   );
 };
 
-export default deleteConfirmationModal;
+export default DeleteConfirmationModal;
