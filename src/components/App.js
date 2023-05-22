@@ -13,7 +13,7 @@ import { HashRouter, Route } from "react-router-dom";
 import { getForecastWeather, parseWeatherData } from "../utils/WeatherApi";
 import "../blocks/WeatherCard.css";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
-
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import itemsApi from "../utils/itemsApi";
 
 function App() {
@@ -25,14 +25,14 @@ function App() {
   const [newItem, setNewItem] = useState({});
   const [prevItems, setPrevItems] = useState([]);
 
-  const [DeleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
+  const [deleteConfirmationModal, setDeleteConfirmationModal] = useState(false);
 
   const handleOpenConfirmModal = () => {
-    setDeleteConfirmationModal(true);
+    setActiveModal("delete");
   };
 
   const handleCloseConfirmModal = () => {
-    setDeleteConfirmationModal(false);
+    setActiveModal("");
   };
 
   const handleSelectCard = (card) => {
@@ -42,10 +42,6 @@ function App() {
 
   const handleCreateModal = () => {
     setActiveModal("create");
-
-    setClothingItems(prevItems);
-    setPrevItems([]);
-    setNewItem({});
   };
 
   const handleCloseModal = () => {
@@ -58,10 +54,27 @@ function App() {
         const temperature = parseWeatherData(data);
 
         setTemp(temperature);
+        itemsApi.get().then((response) => {
+          setClothingItems(response);
+        });
       })
       .catch((error) => {
         console.log(error);
       });
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        handleCloseModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   const handleToggleSwitchChange = () => {
@@ -94,7 +107,10 @@ function App() {
       .remove(itemId)
       .then(() => {
         console.log("Item deleted");
-        setClothingItems((i) => i.filter((x) => x.id !== itemId));
+        setClothingItems((clothingItems) =>
+          clothingItems.filter((x) => x.id !== itemId)
+        );
+        handleCloseModal();
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -109,12 +125,16 @@ function App() {
         >
           <Header onCreateModal={handleCreateModal} />
           <Route exact path="/">
-            <Main weatherTemp={temp} onSelectCard={handleSelectCard} />
+            <Main
+              weatherTemp={temp}
+              onSelectCard={handleSelectCard}
+              clothingItems={clothingItems}
+            />
           </Route>
           <Route path="/profile">
             <Profile
               onCreateModal={handleCreateModal}
-              items={[...clothingItems, ...defaultClothingItems]}
+              items={clothingItems}
               onSelectCard={handleSelectCard}
             />
           </Route>
@@ -136,44 +156,13 @@ function App() {
               onAddItem={handleAddItemSubmit}
             />
           )}
-          {DeleteConfirmationModal && (
-            <div className="modal">
-              <div className="modal__content">
-                <div className="modal__confirmation">
-                  <p className="modal__text_confirmation">
-                    Are you sure you want to delete this item?
-                  </p>
-                  <p className="modal__text_confirmation">
-                    This action is irreversible.
-                  </p>
-                  <button
-                    className="modal__confirmation_close"
-                    onClick={handleCloseConfirmModal}
-                  ></button>
-                  <div className="modal__confirmation_buttons">
-                    <button
-                      className="modal__button_confirm"
-                      type="button"
-                      aria-label="Confirm"
-                      onClick={handleDelete && handleCloseConfirmModal}
-                      /* onClick={handleCloseConfirmModal} */
-                    >
-                      Yes, delete item
-                    </button>
-                    <button
-                      className="modal__button_cancel"
-                      type="button"
-                      aria-label="Cancel"
-                      onClick={handleCloseConfirmModal}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {activeModal === "delete" && (
+            <DeleteConfirmationModal
+              handleDelete={() => handleDelete(selectCard.id)}
+              handleCloseConfirmModal={handleCloseConfirmModal}
+              selectCard={selectCard}
+            />
           )}
-          ;
         </CurrentTemperatureUnitContext.Provider>
       </HashRouter>
     </div>

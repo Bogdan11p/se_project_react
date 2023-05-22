@@ -20,7 +20,7 @@ const itemsApi = {
       }),
     }).then(checkResponse);
   },
-  remove: ({ id }) => {
+  remove: (id) => {
     return fetch(`${baseUrl}/items/${id}`, {
       method: "DELETE",
       headers: {
