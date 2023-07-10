@@ -53,14 +53,13 @@ function App() {
     setIsLoading(true);
 
     auth
-      .signin({ email, password })
+      .signin(email, password)
       .then((data) => {
         if (data.token) {
           return auth.checkTokenValidity(data.token);
         }
       })
       .then((res) => {
-        localStorage.setItem("jwt", res.token);
         setCurrentUser(res.data);
         handleCloseModal();
         setIsLoggedIn(true);

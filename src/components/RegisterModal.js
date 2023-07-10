@@ -88,7 +88,7 @@ const RegisterModal = ({
             className="modal__input"
             placeholder="Password"
             required
-            name="passowrd"
+            name="password"
             id="input-password"
             value={passwordValue}
             onChange={onPasswordChange}
