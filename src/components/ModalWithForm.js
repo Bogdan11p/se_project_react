@@ -2,11 +2,13 @@ import "../blocks/ModalWithForm.css";
 
 const ModalWithForm = ({
   children,
-  buttonText = "Add garment",
+  buttonText,
+  buttonClass,
   title,
   onClose,
   name,
   onSubmit,
+  altButtonClick,
 }) => {
   return (
     <div className={`modal modal__type_${name}`}>
@@ -21,9 +23,23 @@ const ModalWithForm = ({
             ></button>
             <h2 className="modal__header">{title}</h2>
             {children}
-            <button className="modal__submit" type="submit">
-              {buttonText}
-            </button>
+            <div className="modal__buttons-down">
+              <button
+                className={buttonClass.mainButton}
+                type="submit"
+                aria-label="Save"
+                id="addSave"
+              >
+                {buttonText.button}
+              </button>
+              <button
+                className={buttonClass.altButton}
+                type="button"
+                onClick={altButtonClick}
+              >
+                {buttonText.other}
+              </button>
+            </div>
           </fieldset>
         </form>
       </div>
@@ -32,31 +48,3 @@ const ModalWithForm = ({
 };
 
 export default ModalWithForm;
-
-/* const Profile = ({ items, onCreateModal, onSelectCard }) => {
-  const handleCardClick = (x) => {
-    onSelectCard();
-
-    console.log("Selected item:", x);
-  };
-
-  return (
-    <div className="profile">
-      <div className="profile__container">
-        <div className="profile__sidebar">
-          <SideBar />
-        </div>
-        <div className="profile__clothes-section">
-          <ClothesSection
-            cards={items}
-            onCardClick={handleCardClick}
-            onAddClick={onCreateModal}
-          />
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default Profile;
- */

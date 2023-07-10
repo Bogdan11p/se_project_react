@@ -1,7 +1,15 @@
 import checkResponse from "./checkResponse";
-const baseUrl =
-  "https://my-json-server.typicode.com/Bogdan11p/se_project_react";
-/* "https://my-json-server.typicode.com/Bogdan11p/se_project_react/"; */
+import { baseUrl } from "./constants";
+
+const getItem = (key) => {
+  try {
+    const item = localStorage.getItem(key);
+    return item;
+  } catch (error) {
+    console.error("Error retrieving item from local storage:", error);
+    return null;
+  }
+};
 
 const itemsApi = {
   get: () => {
@@ -12,6 +20,7 @@ const itemsApi = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${getItem("jwt")}`,
       },
       body: JSON.stringify({
         name,
@@ -25,6 +34,7 @@ const itemsApi = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${getItem("jwt")}`,
       },
     }).then(checkResponse);
   },

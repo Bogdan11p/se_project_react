@@ -53,3 +53,29 @@
   align-items: center;
   gap: 20px;
 }
+
+.header__login-info {
+  display: flex;
+  gap: 10px;
+  margin-left: 10px;
+}
+
+.header__signup-button {
+  border: none;
+  background-color: white;
+  font-family: Cabinet Grotesk;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+  cursor: pointer;
+}
+
+.header__login-button {
+  border: none;
+  background-color: white;
+  font-family: Cabinet Grotesk;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 25px;
+  cursor: pointer;
+}
