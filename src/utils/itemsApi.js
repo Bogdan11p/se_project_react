@@ -1,7 +1,7 @@
 import checkResponse from "./checkResponse";
 import { baseUrl } from "./constants";
 
-const getItem = (key) => {
+export const getItem = (key) => {
   try {
     const item = localStorage.getItem(key);
     return item;
@@ -20,7 +20,7 @@ const itemsApi = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${getItem("jwt")}`,
+        Authorization: `Bearer ${getItem("jwt")}`,
       },
       body: JSON.stringify({
         name,
@@ -34,7 +34,7 @@ const itemsApi = {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${getItem("jwt")}`,
+        Authorization: `Bearer ${getItem("jwt")}`,
       },
     }).then(checkResponse);
   },
