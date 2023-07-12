@@ -12,15 +12,13 @@ const RegisterModal = ({
   const [nameValue, setNameValue] = React.useState("");
   const [avatarValue, setAvatarValue] = React.useState("");
 
-  const buttonClasses = {
-    mainButton: "modal__login",
-    altButton: "modal__other",
-  };
+  const buttonClassesAlt = "modal__other";
 
-  const buttonTexts = {
-    button: isLoading ? "Saving..." : "Next",
-    other: "or Log in",
-  };
+  const buttonClassesSubmit = "modal__submit";
+
+  const buttonTextsSubmit = "Register";
+
+  const buttonTextsAlt = "or Log in";
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -62,9 +60,11 @@ const RegisterModal = ({
       name="Signup"
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonClass={buttonClasses}
+      buttonClassAlt={buttonClassesAlt}
+      buttonClassSubmit={buttonClassesSubmit}
       altButtonClick={handleOpenLogModal}
-      buttonText={buttonTexts}
+      buttonTextSubmit={buttonTextsSubmit}
+      buttonTextAlt={buttonTextsAlt}
     >
       <div className="modal__label-container">
         <label className="modal__label">

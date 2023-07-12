@@ -1,5 +1,5 @@
 import "../blocks/Header.css";
-import React, { UseContext, useContext } from "react";
+import React, { useContext } from "react";
 import headerLogo from "../images/logo.svg";
 
 import { NavLink } from "react-router-dom/cjs/react-router-dom.min";

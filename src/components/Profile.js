@@ -4,7 +4,16 @@ import React from "react";
 import SideBar from "./SideBar";
 import ClothesSection from "./ClothesSection";
 
-const Profile = ({ items, onSelectCard, onCreateModal, isLoggedIn }) => {
+const Profile = ({
+  items,
+  onSelectCard,
+  onCreateModal,
+  isLoggedIn,
+  handleOpenEditModal,
+  logOut,
+
+  currentUser,
+}) => {
   const handleCardClick = (x) => {
     onSelectCard(x);
 
@@ -15,7 +24,11 @@ const Profile = ({ items, onSelectCard, onCreateModal, isLoggedIn }) => {
     <div className="profile">
       <div className="profile__container">
         <div className="profile__sidebar">
-          <SideBar />
+          <SideBar
+            handleOpenEditModal={handleOpenEditModal}
+            logOut={logOut}
+            currentUser={currentUser}
+          />
         </div>
         <div className="profile__clothes-section">
           <ClothesSection

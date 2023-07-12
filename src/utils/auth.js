@@ -25,6 +25,21 @@ export const signin = (email, password) => {
     .then((res) => res);
 };
 
+export const updateCurrentUser = (token, { name, avatar }) => {
+  console.log("Request Payload:", { name, avatar });
+
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  })
+    .then((res) => checkResponse(res))
+    .then((res) => res);
+};
+
 export const checkTokenValidity = (token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "GET",

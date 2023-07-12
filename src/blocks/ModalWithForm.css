@@ -49,17 +49,6 @@
   padding-top: 8px;
 }
 
-.modal__submit {
-  margin-top: 42px;
-  border-radius: 4px;
-  height: 36px;
-  width: 124px;
-  color: white;
-  background: black;
-  border: none;
-  cursor: pointer;
-}
-
 .modal__submit:hover {
   background: rgba(0, 0, 0, 0.6);
 }
@@ -88,7 +77,7 @@
 .modal__buttons-down {
   display: flex;
   gap: 5px;
-  margin-top: 30px;
+  padding-top: 40px;
 }
 
 .modal__other {
@@ -96,14 +85,29 @@
   background-color: white;
   cursor: pointer;
   color: grey;
+  width: 79px;
+  height: 36px;
 }
 
-.modal__login {
+.modal__submit {
   border: none;
   background-color: black;
   color: white;
-  width: 73px;
-  height: 36px;
+  width: 90px;
+  height: 45px;
   border-radius: 4px;
   cursor: pointer;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.modal__other-newGarment {
+  visibility: hidden;
+}
+
+.modal__other-editProfile {
+  visibility: hidden;
 }

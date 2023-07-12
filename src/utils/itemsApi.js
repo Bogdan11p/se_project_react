@@ -15,12 +15,12 @@ const itemsApi = {
   get: () => {
     return fetch(`${baseUrl}/items`).then(checkResponse);
   },
-  add: ({ name, imageUrl, weather }) => {
+  add: (token, { name, imageUrl, weather }) => {
     return fetch(`${baseUrl}/items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${getItem("jwt")}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name,
@@ -29,12 +29,12 @@ const itemsApi = {
       }),
     }).then(checkResponse);
   },
-  remove: (id) => {
-    return fetch(`${baseUrl}/items/${id}`, {
+  remove: (token, _id) => {
+    return fetch(`${baseUrl}/items/${_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${getItem("jwt")}`,
+        Authorization: `Bearer ${token}`,
       },
     }).then(checkResponse);
   },

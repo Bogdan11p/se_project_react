@@ -10,14 +10,13 @@ const LoginModal = ({
   const [emailValue, setEmail] = useState("");
   const [passwordValue, setPassword] = useState("");
 
-  const buttonClasses = {
-    mainButton: "modal__login",
-    altButton: "modal__other",
-  };
-  const buttonTexts = {
-    button: isLoading ? "Saving..." : "Log in",
-    other: "or Register",
-  };
+  const buttonClassesAlt = "modal__other";
+
+  const buttonClassesSubmit = "modal__submit";
+
+  const buttonTextsSubmit = "Log in";
+
+  const buttonTextsAlt = "or Register";
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -49,9 +48,11 @@ const LoginModal = ({
       onClose={onClose}
       onSubmit={handleSubmit}
       /* onClick={handleOpenRegistrationModal} */
-      buttonClass={buttonClasses}
+      buttonClassAlt={buttonClassesAlt}
+      buttonClassSubmit={buttonClassesSubmit}
       altButtonClick={handleOpenRegistrationModal}
-      buttonText={buttonTexts}
+      buttonTextSubmit={buttonTextsSubmit}
+      buttonTextAlt={buttonTextsAlt}
     >
       <div className="modal__label-container">
         <label className="modal__label">
