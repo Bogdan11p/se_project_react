@@ -2,13 +2,10 @@ import "../blocks/DeleteConfirmationModal.css";
 
 const DeleteConfirmationModal = ({
   handleCloseConfirmModal,
+  handleCancel,
   handleDelete,
   selectCard,
 }) => {
-  const handleCancel = () => {
-    handleCloseConfirmModal();
-  };
-
   return (
     <div className="modal">
       <div className="modal__content">

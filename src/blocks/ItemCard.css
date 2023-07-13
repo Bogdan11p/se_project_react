@@ -1,13 +1,13 @@
-.card_section {
+.card__section {
   margin-top: 20px;
   margin: 15px 15px;
 }
 
-.card_name {
+.card__name {
   text-align: center;
   position: absolute;
-  top: 16px;
-  right: 125px;
+  top: 18px;
+  right: 150px;
   background-color: white;
   padding-left: 10px;
   padding-right: 10px;
@@ -15,14 +15,14 @@
   text-align: center;
 }
 
-.card_image {
+.card__image {
   width: 328px;
   height: 328px;
   border-radius: 10px;
   cursor: pointer;
 }
 
-.card_items {
+.card__items {
   display: flex;
   flex-wrap: wrap;
   gap: 17px;
@@ -30,6 +30,24 @@
   margin-top: 20px;
 }
 
-.card_container {
+.card__container {
   position: relative;
+  width: 324px;
+  height: 326px;
+}
+
+.cards__like {
+  background: transparent url(../images/like-logo.svg) center no-repeat;
+  width: 20px;
+  height: 17px;
+  border: none;
+  position: relative;
+  bottom: 313px;
+  left: 180px;
+  cursor: pointer;
+}
+
+.cards__like_active {
+  background: transparent url("../images/like-active.svg") center no-repeat;
+  border: none;
 }

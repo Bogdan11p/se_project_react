@@ -6,7 +6,7 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import { temperature } from "../utils/WeatherApi";
 import "../blocks/Main.css";
 
-function Main({ weatherTemp, onSelectCard }) {
+function Main({ weatherTemp, onSelectCard, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const weatherType = useMemo(() => {
     if (weatherTemp >= 86) {
@@ -28,11 +28,11 @@ function Main({ weatherTemp, onSelectCard }) {
   return (
     <main className="main">
       <WeatherCard day={false} type="cloudyn" weatherTemp={weatherTemp} />
-      <section id="card-section" className="card_section">
+      <section id="card-section" className="card__section">
         <p className="main_text">
           Today is {currentTempString} / You may want to wear:
         </p>
-        <div id="card-items" className="card_items">
+        <div id="card-items" className="card__items">
           {filteredCards.map((x) => (
             <ItemCard
               x={x}
@@ -43,6 +43,7 @@ function Main({ weatherTemp, onSelectCard }) {
               id={x.id}
               link={x.link}
               _id={undefined}
+              onCardLike={onCardLike}
             />
           ))}
         </div>

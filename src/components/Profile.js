@@ -11,6 +11,7 @@ const Profile = ({
   isLoggedIn,
   handleOpenEditModal,
   logOut,
+  onCardLike,
 
   currentUser,
 }) => {
@@ -22,22 +23,21 @@ const Profile = ({
 
   return (
     <div className="profile">
-      <div className="profile__container">
-        <div className="profile__sidebar">
-          <SideBar
-            handleOpenEditModal={handleOpenEditModal}
-            logOut={logOut}
-            currentUser={currentUser}
-          />
-        </div>
-        <div className="profile__clothes-section">
-          <ClothesSection
-            cards={items}
-            onCardClick={handleCardClick}
-            onAddClick={onCreateModal}
-            isLoggedIn={isLoggedIn}
-          />
-        </div>
+      <div className="profile__sidebar">
+        <SideBar
+          handleOpenEditModal={handleOpenEditModal}
+          logOut={logOut}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="profile__clothes-section">
+        <ClothesSection
+          cards={items}
+          onCardClick={handleCardClick}
+          onAddClick={onCreateModal}
+          isLoggedIn={isLoggedIn}
+          onClick={onCardLike}
+        />
       </div>
     </div>
   );

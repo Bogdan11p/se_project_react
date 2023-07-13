@@ -28,6 +28,12 @@
   margin: 0 0 0 40px; */
 }
 
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
 .header__logo {
   display: flex;
   gap: 20px;

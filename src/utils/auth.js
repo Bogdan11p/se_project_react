@@ -49,5 +49,7 @@ export const checkTokenValidity = (token) => {
     },
   })
     .then((res) => checkResponse(res))
-    .then((data) => data);
+    .then((data) => {
+      return data;
+    });
 };

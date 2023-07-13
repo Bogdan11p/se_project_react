@@ -27,7 +27,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose, isLoading, token }) => {
       imageUrl: imageUrl,
       weather: weather,
     }; */
-    onAddItem(token, { name, imageUrl, weather });
+    onAddItem({ name, imageUrl, weather });
   };
 
   const handleWeatherChange = (e) => {

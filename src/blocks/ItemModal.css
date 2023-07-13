@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.modal__delete {
+.itemDeleteButtonClassName {
   width: 101px;
   height: 24px;
   font-family: "Cabinet Grotesk";
@@ -22,4 +22,39 @@
   background-color: white;
   cursor: pointer;
   margin-top: 15px;
+}
+
+.item__delete-btn:hover {
+  color: #f80000;
+}
+
+.item__delete-btn_visible {
+  visibility: visible;
+}
+
+.item__delete-btn_hidden {
+  visibility: hidden;
+}
+
+.modal__image {
+  border-radius: 10px;
+  width: 496px;
+  height: 498px;
+}
+
+.modal__content-item {
+  padding: 0;
+  height: 610px;
+}
+
+.modal__subcontainer {
+  width: 475px;
+}
+
+.modal__title {
+  margin-left: 25px;
+}
+
+.modal__weather {
+  margin-left: 25px;
 }

@@ -1,11 +1,18 @@
 import "../blocks/ItemModal.css";
 import "../components/ModalWithForm";
-import React from "react";
+import React, { useContext } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 const ItemModal = ({ selectCard, onClose, handleOpenConfirmationModal }) => {
+  const { currentUser } = useContext(CurrentUserContext);
+  const isOwn = selectCard.owner === currentUser._id;
+  const itemDeleteButtonClassName = `item__delete-btn ${
+    isOwn ? "item__delete-btn_visible" : "item__delete-btn_hidden"
+  }`;
+
   return (
     <div className={`modal`}>
-      <div className="modal__content">
+      <div className="modal__content modal__content-item">
         <button
           className="modal__close"
           type="button"
@@ -23,7 +30,7 @@ const ItemModal = ({ selectCard, onClose, handleOpenConfirmationModal }) => {
             <p className="modal__weather">Weather type: {selectCard.weather}</p>
           </div>
           <button
-            className="modal__delete"
+            className="itemDeleteButtonClassName"
             onClick={handleOpenConfirmationModal}
           >
             Delete

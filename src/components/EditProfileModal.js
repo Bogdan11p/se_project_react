@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
-const EditProfileModal = ({ onClose, onEditProfile, token, currentUser }) => {
+const EditProfileModal = ({ onClose, handleOpenEditModal, onEditProfile, token, currentUser }) => {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 
@@ -32,6 +32,7 @@ const EditProfileModal = ({ onClose, onEditProfile, token, currentUser }) => {
       buttonClassAlt={buttonClassesAlt}
       buttonClassSubmit={buttonClassesSubmit}
       buttonTextSubmit={buttonTextsSubmit}
+      altButtonClick={handleOpenEditModal}
     >
       <div className="modal__label-container">
         <label className="modal__label">

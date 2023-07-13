@@ -11,11 +11,10 @@ const Header = ({
   parseWeatherData,
   handleOpenLogModal,
   handleOpenRegistrationModal,
-  isLoggedIn,
 }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
 
-  const userData = currentUser ? currentUser : { name: "", avatar: " " };
+  /* const userData = currentUser ? currentUser.name : { name: "", avatar: " " }; */
 
   if (!parseWeatherData) return null;
 
@@ -48,10 +47,14 @@ const Header = ({
               + Add Clothes
             </button>
             <NavLink to="/profile" className="header__link">
-              <p className="header__name">{userData.name}</p>
+              <p className="header__name">
+                {currentUser ? currentUser.name : "Terrence Tegegne"}
+              </p>
+            </NavLink>
+            <NavLink to="/profile" className="header__link">
               <img
                 className="header__avatar"
-                src={userData.avatar}
+                src={currentUser ? currentUser.avatar : ""}
                 alt="User avatar"
               />
             </NavLink>

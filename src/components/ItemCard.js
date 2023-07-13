@@ -1,7 +1,10 @@
 import "../blocks/ItemCard.css";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 const ItemCard = ({
   x,
+  card,
   name,
   weather,
   onSelectCard,
@@ -9,21 +12,35 @@ const ItemCard = ({
   id,
   link,
   imageUrl,
+  onCardLike,
 }) => {
+  const { currentUser } = useContext(CurrentUserContext);
+  const isLiked = x.likes.some((user) => user === currentUser._id);
+  const itemLikeButtonClassName = `cards__like ${
+    isLiked ? "cards__like_active" : "cards__like_inactive"
+  }`;
+
   return (
     <div className="card">
-      <div key={x._id || x.id} className="card_container">
+      <div key={x._id || x.id} className="card__container">
         <div>
           <img
             src={x.link || x.imageUrl}
             alt={x.name}
-            className="card_image"
+            className="card__image"
             onClick={() =>
               onSelectCard(x, name, weather, _id, id, link, imageUrl)
             }
           />
         </div>
-        <div className="card_name"> {x.name} </div>
+        <div className="cards__description">
+          <div className="card__name"> {x.name} </div>
+          <button
+            className={itemLikeButtonClassName}
+            type="button"
+            onClick={onCardLike}
+          ></button>
+        </div>
       </div>
     </div>
   );

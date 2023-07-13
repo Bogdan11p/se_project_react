@@ -53,10 +53,6 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
-.modal__image {
-  border-radius: 4px;
-}
-
 .modal__label-container {
   display: flex;
   flex-direction: column;

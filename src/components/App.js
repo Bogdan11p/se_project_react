@@ -39,17 +39,6 @@ function App() {
 
   const history = useHistory();
 
-  if (token) {
-    checkTokenValidity(token)
-      .then((res) => {
-        setIsLoggedIn(true);
-        setCurrentUser(res.data);
-      })
-      .catch((err) => {
-        console.log("Error checking the validity of the token:", err);
-      });
-  }
-
   const handleProfileUpdate = ({ name, avatar }) => {
     auth
       .updateCurrentUser(token, { name, avatar })
@@ -88,26 +77,26 @@ function App() {
     auth
       .signin(email, password)
       .then((data) => {
+        localStorage.setItem("jwt", data.token);
         if (data.token) {
           return auth.checkTokenValidity(data.token);
         }
       })
       .then((res) => {
-        setCurrentUser(res.data);
+        const data = res.data;
+        setCurrentUser(data);
+        setToken(data.token);
         handleCloseModal();
         setIsLoggedIn(true);
-        history.push("/profile");
+        /* history.push("/profile"); */
       })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleLogOut = () => {
-    localStorage.clear();
+    localStorage.removeItem("jwt");
     setIsLoggedIn(false);
-    /* history.push("/login"); */
+    setToken("");
   };
 
   /*  const handleOutClick = (evt) => {
@@ -130,10 +119,6 @@ function App() {
 
   const handleOpenConfirmModal = () => {
     setActiveModal("delete");
-  };
-
-  const handleCloseConfirmModal = () => {
-    setActiveModal("");
   };
 
   const handleSelectCard = (card) => {
@@ -184,7 +169,8 @@ function App() {
     });
   };
 
-  const handleAddItemSubmit = (token, { name, imageUrl, weather }) => {
+  const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
+    console.log(token);
     /* const card = { name, imageUrl, weather };
     setIsLoading(true);
  */
@@ -194,67 +180,82 @@ function App() {
       weather,
     }; */
     itemsApi
-      .add(token, { name, weather, imageUrl })
-      .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+      .add({ name, weather, imageUrl }, token)
+      .then((res) => {
+        setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
       })
-      .catch((error) => {
-        console.log("Error:", error);
+      .catch((err) => {
+        console.error(err);
       });
   };
 
-  const handleDelete = (itemId) => {
+  const handleDeleteItem = ({ _id }) => {
     itemsApi
-
-      .remove(itemId)
+      .remove(_id, token)
       .then(() => {
-        console.log("Item deleted");
-        setClothingItems((clothingItems) =>
-          clothingItems.filter((x) => x.id !== itemId)
-        );
+        const updateItems = clothingItems.filter((x) => {
+          return x._id !== _id;
+        });
+        setClothingItems(updateItems);
         handleCloseModal();
       })
       .catch((error) => {
         console.log("Error:", error);
       });
   };
+
+  function handleLikeClick(currentUser, isLiked) {
+    !isLiked
+      ? itemsApi
+          .addCardLike(currentUser, token)
+          .then((updatedCard) => {
+            updatedCard = updatedCard.data;
+            setClothingItems((items) =>
+              items.map((x) => (x._id === currentUser._id ? updatedCard : x))
+            );
+          })
+          .catch((e) => console.error(e))
+      : itemsApi
+          .removeCardLike(currentUser, token)
+          .then((updatedCard) => {
+            updatedCard = updatedCard.data;
+            setClothingItems((items) =>
+              items.map((x) => (x._id === currentUser._id ? updatedCard : x))
+            );
+          })
+          .catch((e) => console.error(e));
+  }
 
   useEffect(() => {
-    const tokenCheck = () => {
-      const jwt = localStorage.getItem("jwt");
-      if (jwt) {
-        auth
-          .checkTokenValidity(jwt)
-          .then((res) => {
-            if (res) {
-              setToken(jwt);
-              setIsLoggedIn(true);
-              const { name, avatar, _id } = res.data;
-              setCurrentUser({ name, avatar, _id });
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    };
-
-    tokenCheck();
-  }, []);
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      auth
+        .checkTokenValidity(jwt)
+        .then((res) => {
+          setCurrentUser(res.data);
+          setToken(jwt);
+          setIsLoggedIn(true);
+        })
+        .catch((e) => {
+          console.error(`Token Check use effect: ${e}`);
+        });
+    }
+  }, [token]);
 
   return (
     <BrowserRouter>
-      <CurrentUserContext.Provider value={currentUser}>
-        <CurrentTemperatureUnitContext.Provider
-          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-        >
+      <CurrentTemperatureUnitContext.Provider
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <CurrentUserContext.Provider value={{ currentUser, isLoggedIn }}>
           <Header
             onCreateModal={handleCreateModal}
             parseWeatherData={parseWeatherData}
             handleOpenLogModal={handleOpenSigninModal}
             handleOpenRegistrationModal={handleOpenRegisterModal}
             isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
           />
           <Switch>
             <Route exact path="/">
@@ -262,6 +263,7 @@ function App() {
                 weatherTemp={temp}
                 onSelectCard={handleSelectCard}
                 clothingItems={clothingItems}
+                onCardLike={handleLikeClick}
               />
             </Route>
             <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
@@ -271,6 +273,7 @@ function App() {
                 onSelectCard={handleSelectCard}
                 handleOpenEditModal={handleOpenEditModal}
                 logOut={handleLogOut}
+                onCardLike={handleLikeClick}
               />
             </ProtectedRoute>
           </Switch>
@@ -279,7 +282,7 @@ function App() {
             <ItemModal
               selectCard={selectCard}
               onClose={handleCloseModal}
-              onDelete={handleDelete}
+              onDelete={handleDeleteItem}
               handleOpenConfirmationModal={handleOpenConfirmModal}
             />
           )}
@@ -294,9 +297,10 @@ function App() {
           )}
           {activeModal === "delete" && (
             <DeleteConfirmationModal
-              handleDelete={() => handleDelete(selectCard.id)}
-              handleCloseConfirmModal={handleCloseConfirmModal}
+              handleDelete={handleDeleteItem}
+              handleCloseConfirmModal={handleCloseModal}
               selectCard={selectCard}
+              handleCancel={handleCloseModal}
             />
           )}
           {activeModal === "login" && (
@@ -323,8 +327,8 @@ function App() {
               currentUser={currentUser}
             />
           )}
-        </CurrentTemperatureUnitContext.Provider>
-      </CurrentUserContext.Provider>
+        </CurrentUserContext.Provider>
+      </CurrentTemperatureUnitContext.Provider>
     </BrowserRouter>
   );
 }
