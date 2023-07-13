@@ -6,7 +6,7 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import { temperature } from "../utils/WeatherApi";
 import "../blocks/Main.css";
 
-function Main({ weatherTemp, onSelectCard, onCardLike }) {
+function Main({ weatherTemp, onSelectCard, onCardLike, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const weatherType = useMemo(() => {
     if (weatherTemp >= 86) {
@@ -21,7 +21,7 @@ function Main({ weatherTemp, onSelectCard, onCardLike }) {
   const currentTemp = temperature(weatherTemp);
   const currentTempString = currentTemp[currentTemperatureUnit];
 
-  const filteredCards = defaultClothingItems.filter((x) => {
+  const filteredCards = clothingItems.filter((x) => {
     return x.weather.toLowerCase() === weatherType;
   });
 
@@ -33,19 +33,20 @@ function Main({ weatherTemp, onSelectCard, onCardLike }) {
           Today is {currentTempString} / You may want to wear:
         </p>
         <div id="card-items" className="card__items">
-          {filteredCards.map((x) => (
-            <ItemCard
-              x={x}
-              onSelectCard={onSelectCard}
-              key={x._id || x.id}
-              name={x.name}
-              weather={x.weather}
-              id={x.id}
-              link={x.link}
-              _id={undefined}
-              onCardLike={onCardLike}
-            />
-          ))}
+          {filteredCards.map((x) => {
+            return (
+              <ItemCard
+                x={x}
+                onSelectCard={onSelectCard}
+                key={x._id || x.id}
+                name={x.name}
+                weather={x.weather}
+                link={x.link}
+                _id={x._id}
+                onCardLike={onCardLike}
+              />
+            );
+          })}
         </div>
       </section>
     </main>

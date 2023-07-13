@@ -31,8 +31,9 @@ const itemsApi = {
     }).then(checkResponse);
   },
 
-  remove: (token, _id) => {
-    return fetch(`${baseUrl}/items/${_id}`, {
+  remove: (id, token) => {
+    console.log(id);
+    return fetch(`${baseUrl}/items/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -42,6 +43,7 @@ const itemsApi = {
   },
 
   addCardLike: ({ _id, user }, token) => {
+    console.log(_id);
     return fetch(`${baseUrl}/items/${_id}/likes`, {
       method: "PUT",
       headers: {
@@ -52,14 +54,14 @@ const itemsApi = {
     }).then(checkResponse);
   },
 
-  removeCardLike: ({ _id }, token) => {
+  removeCardLike: ({ _id, user }, token) => {
     return fetch(`${baseUrl}/items/${_id}/likes`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ _id }),
+      body: JSON.stringify({ _id, user }),
     }).then(checkResponse);
   },
 };

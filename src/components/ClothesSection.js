@@ -20,7 +20,7 @@ const ClothesSection = ({ cards, onCardClick, onAddClick, onCardLike }) => {
         + Add new
       </button>
       <ul className="clothes__list">
-        {cards.map((x) => (
+        {userItems.map((x) => (
           <ItemCard
             key={x._id || x.id}
             x={x}

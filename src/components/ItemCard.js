@@ -4,12 +4,10 @@ import { useContext } from "react";
 
 const ItemCard = ({
   x,
-  card,
   name,
   weather,
   onSelectCard,
   _id,
-  id,
   link,
   imageUrl,
   onCardLike,
@@ -28,9 +26,7 @@ const ItemCard = ({
             src={x.link || x.imageUrl}
             alt={x.name}
             className="card__image"
-            onClick={() =>
-              onSelectCard(x, name, weather, _id, id, link, imageUrl)
-            }
+            onClick={() => onSelectCard(x, name, weather, _id, link, imageUrl)}
           />
         </div>
         <div className="cards__description">
@@ -38,7 +34,7 @@ const ItemCard = ({
           <button
             className={itemLikeButtonClassName}
             type="button"
-            onClick={onCardLike}
+            onClick={() => onCardLike(_id, isLiked)}
           ></button>
         </div>
       </div>

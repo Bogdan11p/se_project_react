@@ -51,3 +51,8 @@
   background: transparent url("../images/like-active.svg") center no-repeat;
   border: none;
 }
+
+.cards__like_inactive {
+  background: transparent url(../images/like-logo.svg) center no-repeat;
+  border: none;
+}

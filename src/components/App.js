@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "../blocks/App.css";
 import "../blocks/DeleteConfirmationModal.css";
 import Header from "../components/Header";
@@ -88,16 +88,17 @@ function App() {
         setToken(data.token);
         handleCloseModal();
         setIsLoggedIn(true);
-        /* history.push("/profile"); */
+        history.push("/profile");
       })
       .catch((err) => console.log(err));
   };
 
-  const handleLogOut = () => {
+  const handleLogOut = useCallback(() => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setToken("");
-  };
+    history.push("/");
+  }, [history]);
 
   /*  const handleOutClick = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -140,8 +141,8 @@ function App() {
         const temperature = parseWeatherData(data);
 
         setTemp(temperature);
-        itemsApi.get().then((response) => {
-          setClothingItems(response);
+        itemsApi.get().then((items) => {
+          setClothingItems(items);
         });
       })
       .catch((error) => {
@@ -164,9 +165,9 @@ function App() {
   }, []);
 
   const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((currentTempState) => {
-      return currentTempState === "C" ? "F" : "C";
-    });
+    currentTemperatureUnit === "F"
+      ? setCurrentTemperatureUnit("C")
+      : setCurrentTemperatureUnit("F");
   };
 
   const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
@@ -190,12 +191,12 @@ function App() {
       });
   };
 
-  const handleDeleteItem = ({ _id }) => {
+  const handleDeleteItem = (itemId) => {
     itemsApi
-      .remove(_id, token)
+      .remove(itemId, token)
       .then(() => {
         const updateItems = clothingItems.filter((x) => {
-          return x._id !== _id;
+          return x._id !== itemId;
         });
         setClothingItems(updateItems);
         handleCloseModal();
@@ -205,27 +206,29 @@ function App() {
       });
   };
 
-  function handleLikeClick(currentUser, isLiked) {
+  const handleLikeClick = (itemId, isLiked) => {
+    console.log(isLiked);
+    console.log(itemId);
     !isLiked
       ? itemsApi
-          .addCardLike(currentUser, token)
+          .addCardLike({ _id: itemId, user: currentUser }, token)
           .then((updatedCard) => {
-            updatedCard = updatedCard.data;
+            const cardData = updatedCard.data;
             setClothingItems((items) =>
-              items.map((x) => (x._id === currentUser._id ? updatedCard : x))
+              items.map((x) => (x.itemId === itemId ? cardData : x))
             );
           })
           .catch((e) => console.error(e))
       : itemsApi
-          .removeCardLike(currentUser, token)
+          .removeCardLike({ _id: itemId, user: currentUser }, token)
           .then((updatedCard) => {
-            updatedCard = updatedCard.data;
+            const cardData = updatedCard.data;
             setClothingItems((items) =>
-              items.map((x) => (x._id === currentUser._id ? updatedCard : x))
+              items.map((x) => (x.itemId === itemId ? cardData : x))
             );
           })
           .catch((e) => console.error(e));
-  }
+  };
 
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
