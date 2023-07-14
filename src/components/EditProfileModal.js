@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ModalWithForm from "./ModalWithForm";
+import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
-const EditProfileModal = ({ onClose, handleOpenEditModal, onEditProfile, token, currentUser }) => {
+const EditProfileModal = ({ onClose, handleOpenEditModal, onEditProfile }) => {
+  const { currentUser } = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 
@@ -44,8 +46,8 @@ const EditProfileModal = ({ onClose, handleOpenEditModal, onEditProfile, token, 
             required
             name="name"
             id="input-name"
-            minLength="2"
-            maxLength="30"
+            minLength={2}
+            maxLength={30}
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></input>

@@ -9,7 +9,7 @@
   position: relative;
 }
 
-.itemDeleteButtonClassName {
+.item__delete-btn {
   width: 101px;
   height: 24px;
   font-family: "Cabinet Grotesk";

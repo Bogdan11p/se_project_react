@@ -30,7 +30,8 @@ const ItemModal = ({ selectCard, onClose, handleOpenConfirmationModal }) => {
             <p className="modal__weather">Weather type: {selectCard.weather}</p>
           </div>
           <button
-            className="itemDeleteButtonClassName"
+            className={itemDeleteButtonClassName}
+            type="button"
             onClick={handleOpenConfirmationModal}
           >
             Delete

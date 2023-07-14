@@ -88,17 +88,18 @@ function App() {
         setToken(data.token);
         handleCloseModal();
         setIsLoggedIn(true);
-        history.push("/profile");
+        /* history.push("/profile"); */
       })
       .catch((err) => console.log(err));
   };
 
-  const handleLogOut = useCallback(() => {
+  const handleLogOut = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setToken("");
-    history.push("/");
-  }, [history]);
+    setCurrentUser("");
+    /* history.push("/"); */
+  };
 
   /*  const handleOutClick = (evt) => {
     if (evt.target === evt.currentTarget) {
@@ -326,8 +327,7 @@ function App() {
             <EditProfileModal
               onClose={handleCloseModal}
               onEditProfile={handleProfileUpdate}
-              token={token}
-              currentUser={currentUser}
+              clothingItems={clothingItems}
             />
           )}
         </CurrentUserContext.Provider>
