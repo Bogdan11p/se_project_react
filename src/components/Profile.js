@@ -36,7 +36,7 @@ const Profile = ({
           onCardClick={handleCardClick}
           onAddClick={onCreateModal}
           isLoggedIn={isLoggedIn}
-          onClick={onCardLike}
+          onCardLike={onCardLike}
         />
       </div>
     </div>

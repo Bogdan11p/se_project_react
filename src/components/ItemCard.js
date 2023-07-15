@@ -18,6 +18,10 @@ const ItemCard = ({
     isLiked ? "cards__like_active" : "cards__like_inactive"
   }`;
 
+  const handleCardLike = () => {
+    onCardLike(x._id, isLiked);
+  };
+
   return (
     <div className="card">
       <div key={x._id || x.id} className="card__container">
@@ -34,7 +38,7 @@ const ItemCard = ({
           <button
             className={itemLikeButtonClassName}
             type="button"
-            onClick={() => onCardLike(_id, isLiked)}
+            onClick={handleCardLike}
           ></button>
         </div>
       </div>
