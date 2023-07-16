@@ -41,7 +41,6 @@ function App() {
   const history = useHistory();
 
   const handleProfileUpdate = ({ name, avatar }) => {
-    debugger;
     auth
       .updateCurrentUser(token, { name, avatar })
       .then(() => {
@@ -147,7 +146,6 @@ function App() {
 
         setTemp(temperature);
         itemsApi.get().then((items) => {
-          debugger;
           setClothingItems(items);
         });
       })
@@ -180,7 +178,6 @@ function App() {
     itemsApi
       .add({ name, weather, imageUrl }, token)
       .then((res) => {
-        debugger;
         setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
       })
@@ -196,7 +193,7 @@ function App() {
         const updateItems = clothingItems.filter((x) => {
           return x._id !== itemId;
         });
-        debugger;
+
         setClothingItems(updateItems);
         handleCloseModal();
       })
@@ -214,7 +211,7 @@ function App() {
         .then((updatedCard) => {
           console.log(updatedCard);
           const cardData = updatedCard.data;
-          debugger;
+
           setClothingItems((prevItems) =>
             prevItems.map((x) => (x._id === itemId ? cardData : x))
           );
@@ -226,7 +223,7 @@ function App() {
         .then((updatedCard) => {
           console.log(updatedCard);
           const cardData = updatedCard.data;
-          debugger;
+
           setClothingItems((prevItems) =>
             prevItems.map((x) => (x._id === itemId ? cardData : x))
           );

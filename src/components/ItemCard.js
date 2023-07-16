@@ -6,8 +6,8 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 
 const ItemCard = ({
   x,
-  /* name,
-  weather, */
+  name,
+  /*weather, */
   onSelectCard,
   _id,
   /*  link,
