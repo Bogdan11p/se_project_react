@@ -1,25 +1,60 @@
+import notLiked from "../images/like-logo.svg";
+import liked from "../images/like-active.svg";
 import "../blocks/ItemCard.css";
-import CurrentUserContext from "../contexts/CurrentUserContext";
 import { useContext } from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 
 const ItemCard = ({
   x,
-  name,
-  weather,
+  /* name,
+  weather, */
   onSelectCard,
   _id,
-  link,
-  imageUrl,
+  /*  link,
+  imageUrl, */
   onCardLike,
+  isLoggedIn,
 }) => {
   const { currentUser } = useContext(CurrentUserContext);
+
   const isLiked = x.likes.some((user) => user === currentUser._id);
   const itemLikeButtonClassName = `cards__like ${
-    isLiked ? "cards__like_active" : "cards__like_inactive"
+    isLoggedIn ? "cards__like_active" : "cards__like_inactive"
   }`;
 
-  const handleCardLike = () => {
+  /* const handleCardLike = () => {
     onCardLike(x._id, isLiked);
+  }; */
+
+  const renderNotLiked = () => {
+    console.log(isLoggedIn);
+    return (
+      <button
+        className={itemLikeButtonClassName}
+        onClick={() => onCardLike(x._id, isLiked)}
+      >
+        <img
+          className="card__heart"
+          src={notLiked}
+          alt="item card is liked, solid heart icon"
+        />
+      </button>
+    );
+  };
+
+  const renderLiked = () => {
+    return (
+      <button
+        className={itemLikeButtonClassName}
+        onClick={() => onCardLike(x._id, isLiked)}
+      >
+        <img
+          className="card__heart"
+          src={liked}
+          alt="item card is liked, solid heart icon"
+        />
+      </button>
+    );
   };
 
   return (
@@ -30,16 +65,12 @@ const ItemCard = ({
             src={x.link || x.imageUrl}
             alt={x.name}
             className="card__image"
-            onClick={() => onSelectCard(x, name, weather, _id, link, imageUrl)}
+            onClick={() => onSelectCard(x, isLiked)}
           />
         </div>
         <div className="cards__description">
           <div className="card__name"> {x.name} </div>
-          <button
-            className={itemLikeButtonClassName}
-            type="button"
-            onClick={handleCardLike}
-          ></button>
+          {isLiked ? renderLiked() : renderNotLiked()}
         </div>
       </div>
     </div>

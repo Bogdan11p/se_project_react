@@ -6,7 +6,14 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import { temperature } from "../utils/WeatherApi";
 import "../blocks/Main.css";
 
-function Main({ weatherTemp, onSelectCard, onCardLike, clothingItems }) {
+function Main({
+  weatherTemp,
+  onSelectCard,
+  onCardLike,
+  clothingItems,
+  isLoggedIn,
+  currentUser,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const weatherType = useMemo(() => {
     if (weatherTemp >= 86) {
@@ -39,11 +46,9 @@ function Main({ weatherTemp, onSelectCard, onCardLike, clothingItems }) {
                 x={x}
                 onSelectCard={onSelectCard}
                 key={x._id || x.id}
-                name={x.name}
-                weather={x.weather}
-                link={x.link}
-                _id={x._id}
                 onCardLike={onCardLike}
+                isLoggedIn={isLoggedIn}
+                currentUser={currentUser}
               />
             );
           })}

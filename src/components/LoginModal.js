@@ -5,7 +5,7 @@ const LoginModal = ({
   onClose,
   handleOpenRegistrationModal,
   handleSignin,
-  isLoading,
+  isLoggedIn,
 }) => {
   const [emailValue, setEmail] = useState("");
   const [passwordValue, setPassword] = useState("");

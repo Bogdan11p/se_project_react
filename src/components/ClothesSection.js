@@ -3,7 +3,13 @@ import "../blocks/ClothesSection.css";
 import ItemCard from "./ItemCard";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-const ClothesSection = ({ cards, onCardClick, onAddClick, onCardLike }) => {
+const ClothesSection = ({
+  cards,
+  onSelectCard,
+  onAddClick,
+  onCardLike,
+  isLoggedIn,
+}) => {
   const { currentUser } = useContext(CurrentUserContext);
   const userItems = cards.filter((card) => card.owner === currentUser._id);
   return (
@@ -24,10 +30,12 @@ const ClothesSection = ({ cards, onCardClick, onAddClick, onCardLike }) => {
           <ItemCard
             key={x._id || x.id}
             x={x}
-            onSelectCard={onCardClick}
-            name={x.name}
-            weather={x.weather}
+            onSelectCard={onSelectCard}
+            currentUser={currentUser}
+            isLoggedIn={isLoggedIn}
             onCardLike={onCardLike}
+
+            /* onCardLike={onCardLike} */
           />
         ))}
       </ul>

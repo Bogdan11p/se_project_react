@@ -36,10 +36,12 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [isLoading, setIsLoading] = React.useState(false);
   const [token, setToken] = React.useState("");
+  const [prevItems, setPrevItems] = useState("");
 
   const history = useHistory();
 
   const handleProfileUpdate = ({ name, avatar }) => {
+    debugger;
     auth
       .updateCurrentUser(token, { name, avatar })
       .then(() => {
@@ -61,6 +63,9 @@ function App() {
           setCurrentUser(res.data);
           handleSignIn({ email, password });
           handleCloseModal();
+          setIsLoggedIn(true);
+          console.log("Updated currentUser:", currentUser);
+          console.log("Updated loggedIn:", isLoggedIn);
         } else {
           console.log("Registration failed:", res.err);
         }
@@ -72,8 +77,6 @@ function App() {
   };
 
   const handleSignIn = ({ email, password }) => {
-    setIsLoading(true);
-
     auth
       .signin(email, password)
       .then((data) => {
@@ -88,8 +91,9 @@ function App() {
         setToken(data.token);
         handleCloseModal();
         setIsLoggedIn(true);
-        /* history.push("/profile"); */
+        history.push("/profile");
       })
+
       .catch((err) => console.log(err));
   };
 
@@ -98,7 +102,7 @@ function App() {
     setIsLoggedIn(false);
     setToken("");
     setCurrentUser("");
-    /* history.push("/"); */
+    history.push("/");
   };
 
   /*  const handleOutClick = (evt) => {
@@ -143,6 +147,7 @@ function App() {
 
         setTemp(temperature);
         itemsApi.get().then((items) => {
+          debugger;
           setClothingItems(items);
         });
       })
@@ -151,7 +156,7 @@ function App() {
       });
   }, []);
 
-  useEffect(() => {
+  /* useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         handleCloseModal();
@@ -163,7 +168,7 @@ function App() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, []); */
 
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === "F"
@@ -172,18 +177,10 @@ function App() {
   };
 
   const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
-    console.log(token);
-    /* const card = { name, imageUrl, weather };
-    setIsLoading(true);
- */
-    /*  const newItem = {
-      name,
-      imageUrl,
-      weather,
-    }; */
     itemsApi
       .add({ name, weather, imageUrl }, token)
       .then((res) => {
+        debugger;
         setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
       })
@@ -199,6 +196,7 @@ function App() {
         const updateItems = clothingItems.filter((x) => {
           return x._id !== itemId;
         });
+        debugger;
         setClothingItems(updateItems);
         handleCloseModal();
       })
@@ -208,27 +206,33 @@ function App() {
   };
 
   const handleLikeClick = (itemId, isLiked) => {
-    console.log(isLiked);
     console.log(itemId);
-    !isLiked
-      ? itemsApi
-          .addCardLike({ _id: itemId, user: currentUser }, token)
-          .then((updatedCard) => {
-            const cardData = updatedCard.data;
-            setClothingItems((items) =>
-              items.map((x) => (x.itemId === itemId ? cardData : x))
-            );
-          })
-          .catch((e) => console.error(e))
-      : itemsApi
-          .removeCardLike({ _id: itemId, user: currentUser }, token)
-          .then((updatedCard) => {
-            const cardData = updatedCard.data;
-            setClothingItems((items) =>
-              items.map((x) => (x.itemId === itemId ? cardData : x))
-            );
-          })
-          .catch((e) => console.error(e));
+    console.log(isLiked);
+    if (!isLiked) {
+      itemsApi
+        .addCardLike({ _id: itemId, user: currentUser }, token)
+        .then((updatedCard) => {
+          console.log(updatedCard);
+          const cardData = updatedCard.data;
+          debugger;
+          setClothingItems((prevItems) =>
+            prevItems.map((x) => (x._id === itemId ? cardData : x))
+          );
+        })
+        .catch((e) => console.error(e));
+    } else {
+      itemsApi
+        .removeCardLike({ _id: itemId, user: currentUser }, token)
+        .then((updatedCard) => {
+          console.log(updatedCard);
+          const cardData = updatedCard.data;
+          debugger;
+          setClothingItems((prevItems) =>
+            prevItems.map((x) => (x._id === itemId ? cardData : x))
+          );
+        })
+        .catch((e) => console.error(e));
+    }
   };
 
   useEffect(() => {
@@ -268,6 +272,8 @@ function App() {
                 onSelectCard={handleSelectCard}
                 clothingItems={clothingItems}
                 onCardLike={handleLikeClick}
+                isLoggedIn={isLoggedIn}
+                currentUser={currentUser}
               />
             </Route>
             <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
@@ -278,6 +284,8 @@ function App() {
                 handleOpenEditModal={handleOpenEditModal}
                 logOut={handleLogOut}
                 onCardLike={handleLikeClick}
+                currentUser={currentUser}
+                isLoggedIn={isLoggedIn}
               />
             </ProtectedRoute>
           </Switch>

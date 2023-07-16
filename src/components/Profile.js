@@ -8,19 +8,12 @@ const Profile = ({
   items,
   onSelectCard,
   onCreateModal,
-  isLoggedIn,
   handleOpenEditModal,
   logOut,
-  onCardLike,
-
   currentUser,
+  isLoggedIn,
+  onCardLike,
 }) => {
-  const handleCardClick = (x) => {
-    onSelectCard(x);
-
-    console.log("Selected item:", x);
-  };
-
   return (
     <div className="profile">
       <div className="profile__sidebar">
@@ -33,10 +26,12 @@ const Profile = ({
       <div className="profile__clothes-section">
         <ClothesSection
           cards={items}
-          onCardClick={handleCardClick}
           onAddClick={onCreateModal}
+          onSelectCard={onSelectCard}
+          currentUser={currentUser}
           isLoggedIn={isLoggedIn}
           onCardLike={onCardLike}
+          onSelectCard={onSelectCard}
         />
       </div>
     </div>

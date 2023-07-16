@@ -37,7 +37,6 @@
 }
 
 .cards__like {
-  background: transparent url(../images/like-logo.svg) center no-repeat;
   width: 20px;
   height: 17px;
   border: none;
@@ -45,14 +44,21 @@
   bottom: 313px;
   left: 180px;
   cursor: pointer;
+  background: transparent center no-repeat;
+}
+
+.card__heart {
+  cursor: pointer;
+  width: 20px;
+  height: 17px;
+  background: transparent center no-repeat;
 }
 
 .cards__like_active {
-  background: transparent url("../images/like-active.svg") center no-repeat;
-  border: none;
+  display: block;
+  background: transparent center no-repeat;
 }
 
 .cards__like_inactive {
-  background: transparent url(../images/like-logo.svg) center no-repeat;
-  border: none;
+  display: none;
 }
