@@ -6,6 +6,7 @@ const DeleteConfirmationModal = ({
   handleDelete,
   selectCard,
 }) => {
+  console.log(selectCard);
   return (
     <div className="modal">
       <div className="modal__content">
