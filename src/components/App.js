@@ -187,7 +187,6 @@ function App() {
   };
 
   const handleDeleteItem = (itemId) => {
-    debugger;
     itemsApi
       .remove(itemId, token)
       .then(() => {

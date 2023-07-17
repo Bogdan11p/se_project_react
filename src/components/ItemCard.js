@@ -27,7 +27,6 @@ const ItemCard = ({
   }; */
 
   const renderNotLiked = () => {
-    console.log(isLoggedIn);
     return (
       <button
         className={itemLikeButtonClassName}
