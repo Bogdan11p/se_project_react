@@ -31,11 +31,9 @@ const ClothesSection = ({
             key={x._id || x.id}
             x={x}
             onSelectCard={onSelectCard}
-            currentUser={currentUser}
             isLoggedIn={isLoggedIn}
             onCardLike={onCardLike}
-
-            /* onCardLike={onCardLike} */
+            currentUser={currentUser}
           />
         ))}
       </ul>

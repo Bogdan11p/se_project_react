@@ -1,16 +1,10 @@
 import React, { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 
-const AddItemModal = ({ isOpen, onAddItem, onClose, isLoading, token }) => {
+const AddItemModal = ({ isOpen, onAddItem, onClose, token }) => {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
-
-  const buttonClassesSubmit = "modal__submit";
-
-  const buttonTextsSubmit = "Add Garment";
-
-  const buttonClassesAlt = "modal__other-newGarment";
 
   React.useEffect(() => {
     if (isOpen) {
@@ -22,11 +16,6 @@ const AddItemModal = ({ isOpen, onAddItem, onClose, isLoading, token }) => {
 
   const handleAddItemSubmit = (e) => {
     e.preventDefault();
-    /* const card = {
-      name: name,
-      imageUrl: imageUrl,
-      weather: weather,
-    }; */
     onAddItem({ name, imageUrl, weather });
   };
 
@@ -40,9 +29,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose, isLoading, token }) => {
       name="add"
       onClose={onClose}
       onSubmit={handleAddItemSubmit}
-      buttonClassSubmit={buttonClassesSubmit}
-      buttonClassAlt={buttonClassesAlt}
-      buttonTextSubmit={buttonTextsSubmit}
+      buttonText="Add garment"
     >
       <div className="modal__label-container">
         <label className="modal__label">

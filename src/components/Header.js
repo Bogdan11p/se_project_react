@@ -11,10 +11,9 @@ const Header = ({
   parseWeatherData,
   handleOpenLogModal,
   handleOpenRegistrationModal,
+  isLoggedIn,
 }) => {
-  const { currentUser, isLoggedIn } = useContext(CurrentUserContext);
-
-  /* const userData = currentUser ? currentUser.name : { name: "", avatar: " " }; */
+  const { currentUser } = useContext(CurrentUserContext);
 
   if (!parseWeatherData) return null;
 

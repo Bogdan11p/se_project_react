@@ -16,7 +16,7 @@
 }
 
 .modal__content {
-  position: relative;
+  position: absolute;
   background-color: white;
   max-width: 496px;
   width: 100%;
@@ -100,10 +100,11 @@
   line-height: 20px;
 }
 
-.modal__other-newGarment {
-  visibility: hidden;
-}
-
-.modal__other-editProfile {
-  visibility: hidden;
+.modal__link {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.5);
+  position: relative;
+  left: 105px;
+  top: 70px;
+  font-size: 16px;
 }

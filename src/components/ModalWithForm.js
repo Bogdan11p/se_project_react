@@ -2,10 +2,7 @@ import "../blocks/ModalWithForm.css";
 
 const ModalWithForm = ({
   children,
-  buttonClassSubmit,
-  buttonTextSubmit,
-  buttonClassAlt,
-  buttonTextAlt,
+  buttonText = "",
   title,
   onClose,
   name,
@@ -26,20 +23,8 @@ const ModalWithForm = ({
             <h2 className="modal__header">{title}</h2>
             {children}
             <div className="modal__buttons-down">
-              <button
-                className={buttonClassSubmit}
-                type="submit"
-                aria-label="Save"
-                id="addSave"
-              >
-                {buttonTextSubmit}
-              </button>
-              <button
-                className={buttonClassAlt}
-                type="button"
-                onClick={altButtonClick}
-              >
-                {buttonTextAlt}
+              <button className="modal__submit" type="submit">
+                {buttonText}
               </button>
             </div>
           </fieldset>

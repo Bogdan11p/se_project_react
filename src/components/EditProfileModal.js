@@ -2,16 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import ModalWithForm from "./ModalWithForm";
 import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
-const EditProfileModal = ({ onClose, handleOpenEditModal, onEditProfile }) => {
+const EditProfileModal = ({ onClose, onEditProfile }) => {
   const { currentUser } = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
-
-  const buttonClassesSubmit = "modal__submit";
-
-  const buttonTextsSubmit = "Save changes";
-
-  const buttonClassesAlt = "modal__other-editProfile";
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,10 +25,7 @@ const EditProfileModal = ({ onClose, handleOpenEditModal, onEditProfile }) => {
       name="Edit Profile"
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonClassAlt={buttonClassesAlt}
-      buttonClassSubmit={buttonClassesSubmit}
-      buttonTextSubmit={buttonTextsSubmit}
-      altButtonClick={handleOpenEditModal}
+      buttonText="Save Changes"
     >
       <div className="modal__label-container">
         <label className="modal__label">

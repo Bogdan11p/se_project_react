@@ -7,11 +7,10 @@ import CurrentUserContext from "../contexts/CurrentUserContext";
 const ItemCard = ({
   x,
   name,
-  /*weather, */
+
   onSelectCard,
   _id,
-  /*  link,
-  imageUrl, */
+
   onCardLike,
   isLoggedIn,
 }) => {
@@ -21,10 +20,6 @@ const ItemCard = ({
   const itemLikeButtonClassName = `cards__like ${
     isLoggedIn ? "cards__like_active" : "cards__like_inactive"
   }`;
-
-  /* const handleCardLike = () => {
-    onCardLike(x._id, isLiked);
-  }; */
 
   const renderNotLiked = () => {
     return (

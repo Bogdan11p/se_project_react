@@ -3,6 +3,7 @@ import WeatherCard from "../components/WeatherCard";
 import ItemCard from "../components/ItemCard";
 import React, { useMemo, useContext } from "react";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../contexts/CurrentUserContext";
 import { temperature } from "../utils/WeatherApi";
 import "../blocks/Main.css";
 
@@ -12,8 +13,8 @@ function Main({
   onCardLike,
   clothingItems,
   isLoggedIn,
-  currentUser,
 }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const weatherType = useMemo(() => {
     if (weatherTemp >= 86) {

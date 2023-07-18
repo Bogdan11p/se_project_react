@@ -1,8 +1,6 @@
 // https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}
 import checkResponse from "./checkResponse";
-const latitude = 44.34;
-const longitude = 10.99;
-const APIkey = "ff1313fe582026737c438ec92763ddbe";
+import { latitude, longitude, APIkey } from "./constants";
 
 export const getForecastWeather = () => {
   const weatherApi = fetch(

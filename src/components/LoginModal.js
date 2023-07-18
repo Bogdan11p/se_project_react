@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
+import { Link } from "react-router-dom";
 
-const LoginModal = ({
-  onClose,
-  handleOpenRegistrationModal,
-  handleSignin,
-  isLoggedIn,
-}) => {
+const LoginModal = ({ onClose, handleSignin }) => {
   const [emailValue, setEmail] = useState("");
   const [passwordValue, setPassword] = useState("");
-
-  const buttonClassesAlt = "modal__other";
-
-  const buttonClassesSubmit = "modal__submit";
-
-  const buttonTextsSubmit = "Log in";
-
-  const buttonTextsAlt = "or Register";
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -47,12 +35,7 @@ const LoginModal = ({
       name="Login"
       onClose={onClose}
       onSubmit={handleSubmit}
-      /* onClick={handleOpenRegistrationModal} */
-      buttonClassAlt={buttonClassesAlt}
-      buttonClassSubmit={buttonClassesSubmit}
-      altButtonClick={handleOpenRegistrationModal}
-      buttonTextSubmit={buttonTextsSubmit}
-      buttonTextAlt={buttonTextsAlt}
+      buttonText="Log in"
     >
       <div className="modal__label-container">
         <label className="modal__label">
@@ -83,6 +66,9 @@ const LoginModal = ({
           />
         </label>
       </div>
+      <Link to="/signup" className="modal__link">
+        or Register
+      </Link>
     </ModalWithForm>
   );
 };

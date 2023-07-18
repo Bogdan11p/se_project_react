@@ -1,6 +1,6 @@
 import "../blocks/Profile.css";
-
-import React from "react";
+import CurrentUserContext from "../contexts/CurrentUserContext";
+import React, { useContext } from "react";
 import SideBar from "./SideBar";
 import ClothesSection from "./ClothesSection";
 
@@ -10,10 +10,11 @@ const Profile = ({
   onCreateModal,
   handleOpenEditModal,
   logOut,
-  currentUser,
+
   isLoggedIn,
   onCardLike,
 }) => {
+  const { currentUser } = useContext(CurrentUserContext);
   return (
     <div className="profile">
       <div className="profile__sidebar">

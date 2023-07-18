@@ -1,24 +1,12 @@
 import React from "react";
 import ModalWithForm from "./ModalWithForm";
+import { Link } from "react-router-dom";
 
-const RegisterModal = ({
-  onClose,
-  handleOpenLogModal,
-  handleRegister,
-  isLoading,
-}) => {
+const RegisterModal = ({ onClose, handleRegister }) => {
   const [emailValue, setEmail] = React.useState("");
   const [passwordValue, setPassword] = React.useState("");
   const [nameValue, setNameValue] = React.useState("");
   const [avatarValue, setAvatarValue] = React.useState("");
-
-  const buttonClassesAlt = "modal__other";
-
-  const buttonClassesSubmit = "modal__submit";
-
-  const buttonTextsSubmit = "Register";
-
-  const buttonTextsAlt = "or Log in";
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -60,11 +48,7 @@ const RegisterModal = ({
       name="Signup"
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonClassAlt={buttonClassesAlt}
-      buttonClassSubmit={buttonClassesSubmit}
-      altButtonClick={handleOpenLogModal}
-      buttonTextSubmit={buttonTextsSubmit}
-      buttonTextAlt={buttonTextsAlt}
+      buttonText="Next"
     >
       <div className="modal__label-container">
         <label className="modal__label">
@@ -122,6 +106,9 @@ const RegisterModal = ({
           />
         </label>
       </div>
+      <Link to="/signin" className="modal__link">
+        or Login
+      </Link>
     </ModalWithForm>
   );
 };
