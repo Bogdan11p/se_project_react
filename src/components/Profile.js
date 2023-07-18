@@ -28,7 +28,6 @@ const Profile = ({
         <ClothesSection
           cards={items}
           onAddClick={onCreateModal}
-          onSelectCard={onSelectCard}
           currentUser={currentUser}
           isLoggedIn={isLoggedIn}
           onCardLike={onCardLike}

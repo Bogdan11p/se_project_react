@@ -47,9 +47,7 @@ function App() {
         handleCloseModal();
         setCurrentUser({ ...currentUser, name, avatar });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(console.error);
   };
 
   const handleRegister = ({ email, password, name, avatar }) => {
@@ -69,10 +67,7 @@ function App() {
           console.log("Registration failed:", res.err);
         }
       })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .catch(console.error);
   };
 
   const handleSignIn = ({ email, password }) => {
@@ -93,7 +88,7 @@ function App() {
         history.push("/profile");
       })
 
-      .catch((err) => console.log(err));
+      .catch(console.error);
   };
 
   const handleLogOut = () => {
@@ -149,24 +144,8 @@ function App() {
           setClothingItems(items);
         });
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(console.error);
   }, []);
-
-  /* useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        handleCloseModal();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []); */
 
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === "F"
@@ -181,9 +160,7 @@ function App() {
         setClothingItems([res.data, ...clothingItems]);
         handleCloseModal();
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      .catch(console.error);
   };
 
   const handleDeleteItem = (itemId) => {
@@ -197,9 +174,7 @@ function App() {
         setClothingItems(updateItems);
         handleCloseModal();
       })
-      .catch((error) => {
-        console.log("Error:", error);
-      });
+      .catch(console.error);
   };
 
   const handleLikeClick = (itemId, isLiked) => {
@@ -216,7 +191,7 @@ function App() {
             prevItems.map((x) => (x._id === itemId ? cardData : x))
           );
         })
-        .catch((e) => console.error(e));
+        .catch(console.error);
     } else {
       itemsApi
         .removeCardLike({ _id: itemId, user: currentUser }, token)
@@ -228,7 +203,7 @@ function App() {
             prevItems.map((x) => (x._id === itemId ? cardData : x))
           );
         })
-        .catch((e) => console.error(e));
+        .catch(console.error);
     }
   };
 
@@ -242,9 +217,7 @@ function App() {
           setToken(jwt);
           setIsLoggedIn(true);
         })
-        .catch((e) => {
-          console.error(`Token Check use effect: ${e}`);
-        });
+        .catch(console.error);
     }
   }, [token]);
 
@@ -259,7 +232,6 @@ function App() {
           handleOpenLogModal={handleOpenSigninModal}
           handleOpenRegistrationModal={handleOpenRegisterModal}
           isLoggedIn={isLoggedIn}
-          currentUser={currentUser}
         />
         <Switch>
           <Route exact path="/">
@@ -269,7 +241,6 @@ function App() {
               clothingItems={clothingItems}
               onCardLike={handleLikeClick}
               isLoggedIn={isLoggedIn}
-              currentUser={currentUser}
             />
           </Route>
           <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
@@ -280,7 +251,6 @@ function App() {
               handleOpenEditModal={handleOpenEditModal}
               logOut={handleLogOut}
               onCardLike={handleLikeClick}
-              currentUser={currentUser}
               isLoggedIn={isLoggedIn}
             />
           </ProtectedRoute>
