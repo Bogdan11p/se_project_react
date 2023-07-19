@@ -41,7 +41,6 @@ function App() {
   const history = useHistory();
 
   const handleProfileUpdate = ({ name, avatar }) => {
-    return;
     auth
       .updateCurrentUser(token, { name, avatar })
       .then(() => {
@@ -53,7 +52,7 @@ function App() {
 
   const handleRegister = ({ email, password, name, avatar }) => {
     setIsLoading(true);
-    return;
+
     auth
       .signup({ email, password, name, avatar })
       .then((res) => {
@@ -62,8 +61,6 @@ function App() {
           handleSignIn({ email, password });
           handleCloseModal();
           setIsLoggedIn(true);
-          console.log("Updated currentUser:", currentUser);
-          console.log("Updated loggedIn:", isLoggedIn);
         } else {
           console.log("Registration failed:", res.err);
         }
@@ -72,7 +69,6 @@ function App() {
   };
 
   const handleSignIn = ({ email, password }) => {
-    return;
     auth
       .signin(email, password)
       .then((data) => {
@@ -100,12 +96,6 @@ function App() {
     setCurrentUser("");
     history.push("/");
   };
-
-  /*  const handleOutClick = (evt) => {
-    if (evt.target === evt.currentTarget) {
-      handleCreateModal();
-    }
-  }; */
 
   const handleOpenEditModal = () => {
     setActiveModal("edit");
@@ -142,10 +132,13 @@ function App() {
         const temperature = parseWeatherData(data);
 
         setTemp(temperature);
-        return;
-        itemsApi.get().then((items) => {
-          setClothingItems(items);
-        });
+
+        itemsApi
+          .get()
+          .then((items) => {
+            setClothingItems(items);
+          })
+          .catch(console.error);
       })
       .catch(console.error);
   }, []);
@@ -157,7 +150,6 @@ function App() {
   };
 
   const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
-    return;
     itemsApi
       .add({ name, weather, imageUrl }, token)
       .then((res) => {
@@ -168,7 +160,6 @@ function App() {
   };
 
   const handleDeleteItem = (itemId) => {
-    return;
     itemsApi
       .remove(itemId, token)
       .then(() => {
@@ -186,7 +177,6 @@ function App() {
     console.log(itemId);
     console.log(isLiked);
     if (!isLiked) {
-      return;
       itemsApi
         .addCardLike({ _id: itemId, user: currentUser }, token)
         .then((updatedCard) => {
@@ -199,7 +189,6 @@ function App() {
         })
         .catch(console.error);
     } else {
-      return;
       itemsApi
         .removeCardLike({ _id: itemId, user: currentUser }, token)
         .then((updatedCard) => {
@@ -217,7 +206,6 @@ function App() {
   useEffect(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
-      return;
       auth
         .checkTokenValidity(jwt)
         .then((res) => {
