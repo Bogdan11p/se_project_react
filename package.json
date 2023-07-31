@@ -19,7 +19,7 @@
     "eject": "react-scripts eject",
     "deploy": "npm run build && scp -r ./build/* bpintilie16@fcsb.crabdance.com:/home/bpintilie16/frontend"
   },
-  "https://www.fcsb.crabdance.com/": "https://github.com/Bogdan11p/se_project_express#readme",
+  "homepage": "https://www.fcsb.crabdance.com/",
   "eslintConfig": {
     "extends": [
       "react-app",
