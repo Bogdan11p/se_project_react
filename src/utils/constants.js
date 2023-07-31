@@ -1,6 +1,6 @@
 export const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "deployed-backend-url"
+    ? "api.fcsb.crabdance.com"
     : "http://localhost:3001";
 
 export const latitude = 44.34;
