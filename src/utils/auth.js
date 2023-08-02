@@ -2,6 +2,7 @@ import { baseUrl } from "../utils/constants";
 import checkResponse from "../utils/checkResponse";
 
 export const signup = (user) => {
+  console.log(user);
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
