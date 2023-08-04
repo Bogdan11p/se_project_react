@@ -1,7 +1,7 @@
 export const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://api.fcsb.crabdance.com"
-    : "http://localhost:3000";
+    : "http://localhost:3001";
 
 export const latitude = 44.34;
 export const longitude = 10.99;

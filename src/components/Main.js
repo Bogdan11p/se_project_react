@@ -35,7 +35,7 @@ function Main({
 
   return (
     <main className="main">
-      <WeatherCard day={false} type="cloudyn" weatherTemp={weatherTemp} />
+      <WeatherCard day={true} type="sunnyd" weatherTemp={weatherTemp} />
       <section id="card-section" className="card__section">
         <p className="main_text">
           Today is {currentTempString} / You may want to wear:
