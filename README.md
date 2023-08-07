@@ -7,8 +7,8 @@ or appendChild() methods. I also used react hooks to isolate reusable parts from
 
 ## Links
 
-GitHub pages link for the project - https://github.com/Bogdan11p/se_project_react.git
-backend:https://github.com/Bogdan11p/se_project_express.git
+frontend: https://github.com/Bogdan11p/se_project_react.git
+backend: https://github.com/Bogdan11p/se_project_express.git
 
 ## Domain
 
